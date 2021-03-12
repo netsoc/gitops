@@ -16,7 +16,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: powerdns-postgresql-0
+  name: data-powerdns-postgresql-0
   namespace: default
 spec:
   volumeMode: Filesystem
