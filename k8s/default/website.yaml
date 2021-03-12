@@ -1,0 +1,134 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: website
+  namespace: default
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: website
+      version: 0.1.x
+      sourceRef:
+        kind: HelmRepository
+        name: netsoc
+        namespace: flux-system
+  values:
+    image:
+      repository: ghcr.io/netsoc/website
+      tag: 49f4b913ceaac67ee641afa829d89a674c43400b # {"$imagepolicy": "flux-system:website:tag"}
+    replicaCount: 1
+    ingress:
+      enabled: true
+      tls:
+        - hosts: [www.staging.netsoc.ie]
+          secretName: tls-staging
+      hosts:
+        - host: www.staging.netsoc.ie
+          paths: [/]
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+        traefik.ingress.kubernetes.io/router.middlewares: 'default-meetings-redirect@kubernetescrd,default-events-redirect@kubernetescrd,default-cli-redirect@kubernetescrd'
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: cli-redirect
+  namespace: default
+spec:
+  redirectRegex:
+    regex: '^https://www.staging.netsoc.ie/cli/?$'
+    replacement: 'https://github.com/netsoc/cli/releases/latest'
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: meetings-redirect
+  namespace: default
+spec:
+  redirectRegex:
+    regex: '^https://www.staging.netsoc.ie/meeting/?$'
+    replacement: 'https://tcd-ie.zoom.us/j/97182874403?pwd=ZW9CSHdEZTVRSWVOMmZsU3hsbVRwdz09'
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: events-redirect
+  namespace: default
+spec:
+  redirectRegex:
+    regex: '^https://www.staging.netsoc.ie/event/?$'
+    replacement: 'https://tcd-ie.zoom.us/j/8820425304?pwd=OFdSK3M3UWJDRkZ1NXlUbTBicFNodz09'
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: www-redirect
+  namespace: default
+spec:
+  redirectRegex:
+    regex: '^https://staging.netsoc.ie/(.*)'
+    replacement: 'https://www.staging.netsoc.ie/${1}'
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: www-redirect
+  namespace: default
+spec:
+  entryPoints: [websecure]
+  routes:
+    - match: Host(`staging.netsoc.ie`)
+      kind: Rule
+      services:
+        - name: noop@internal
+          kind: TraefikService
+      middlewares:
+        - name: www-redirect
+          namespace: default
+  tls:
+    secretName: tls-staging
+    domains:
+      - main: 'staging.netsoc.ie'
+        sans:
+        - '*.staging.netsoc.ie'
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: tcd-redirect
+  namespace: default
+spec:
+  redirectRegex:
+    regex: '^https://(.*)netsoc.tcd.ie/(.*)'
+    replacement: 'https://${1}staging.netsoc.ie/${2}'
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: tcd-redirect
+  namespace: default
+spec:
+  entryPoints: [websecure]
+  routes:
+    - match: Host(`netsoc.tcd.ie`) || Host(`www.netsoc.tcd.ie`)
+      kind: Rule
+      services:
+        - name: noop@internal
+          kind: TraefikService
+      middlewares:
+        - name: tcd-redirect
+          namespace: default
+  tls:
+    secretName: tls-tcd
+    domains:
+      - main: 'netsoc.tcd.ie'
+        sans: ['*.netsoc.tcd.ie']
+          - '*.netsoc.tcd.ie'

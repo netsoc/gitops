@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
 - dns
 - tls-staging.yaml
+- tls-tcd.yaml
+- website.yaml
