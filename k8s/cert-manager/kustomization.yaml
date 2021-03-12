@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
 - _namespace.yaml
 - cert-manager.yaml
+- letsencrypt-secrets.yaml
+- letsencrypt.yaml
