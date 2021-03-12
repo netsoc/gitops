@@ -130,5 +130,5 @@ spec:
     secretName: tls-tcd
     domains:
       - main: 'netsoc.tcd.ie'
-        sans: ['*.netsoc.tcd.ie']
+        sans:
           - '*.netsoc.tcd.ie'
