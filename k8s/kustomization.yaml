@@ -11,3 +11,5 @@ resources:
 - default
 patchesStrategicMerge:
 - flux-system-patch.yaml
+configurations:
+- kustomize-helm-values.yaml
