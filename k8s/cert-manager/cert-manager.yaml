@@ -16,3 +16,5 @@ spec:
         namespace: flux-system
   values:
     installCRDs: true
+    extraArgs:
+      - '--dns01-recursive-nameservers=134.226.81.11:53'
