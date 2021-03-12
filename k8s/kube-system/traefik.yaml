@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: traefik
         namespace: flux-system
-      version: 9.8.x
+      version: 9.17.x
   values:
     logs:
       general:
