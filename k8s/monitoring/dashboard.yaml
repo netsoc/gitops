@@ -16,7 +16,15 @@ spec:
         namespace: flux-system
   values:
     settings:
+      clusterName: Netsoc
+      itemsPerPage: 10
+      labelsLimit: 3
+      logsAutoRefreshTimeInterval: 5
+      resourceAutoRefreshTimeInterval: 5
+      disableAccessDeniedNotifications: false
       defaultNamespace: _all
+      namespaceFallbackList:
+        - _all
     metricsScraper:
       enabled: true
     protocolHttp: true
