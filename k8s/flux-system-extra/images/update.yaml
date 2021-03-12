@@ -5,6 +5,7 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
+  interval: 1m0s
   checkout:
     branch: flux2
     gitRepositoryRef:
@@ -12,5 +13,9 @@ spec:
   commit:
     authorEmail: fluxcdbot@users.noreply.github.com
     authorName: fluxcdbot
-  interval: 1m0s
+    messageTemplate: |
+      Automated image update
 
+      {{- range .Updated.Images -}}
+       - {{.}}
+      {{- end -}}
