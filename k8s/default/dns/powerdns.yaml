@@ -34,4 +34,5 @@ spec:
     powerdns:
       domain: netsoc.tcd.ie
       config:
+        default-ttl: 60
         allow-axfr-ips: '10.69.0.0/16,134.226.81.11'
