@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -17,16 +16,16 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/website
-      tag: 49f4b913ceaac67ee641afa829d89a674c43400b # {"$imagepolicy": "flux-system:website:tag"}
+      tag: 0e4a89b9-1615581204Z # {"$imagepolicy": "flux-system:website:tag"}
     replicaCount: 1
     ingress:
       enabled: true
       tls:
-        - hosts: [www.staging.netsoc.ie]
-          secretName: tls-staging
+      - hosts: [www.staging.netsoc.ie]
+        secretName: tls-staging
       hosts:
-        - host: www.staging.netsoc.ie
-          paths: [/]
+      - host: www.staging.netsoc.ie
+        paths: [/]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
@@ -84,20 +83,20 @@ metadata:
 spec:
   entryPoints: [websecure]
   routes:
-    - match: Host(`staging.netsoc.ie`)
-      kind: Rule
-      services:
-        - name: noop@internal
-          kind: TraefikService
-      middlewares:
-        - name: www-redirect
-          namespace: default
+  - match: Host(`staging.netsoc.ie`)
+    kind: Rule
+    services:
+    - name: noop@internal
+      kind: TraefikService
+    middlewares:
+    - name: www-redirect
+      namespace: default
   tls:
     secretName: tls-staging
     domains:
-      - main: 'staging.netsoc.ie'
-        sans:
-        - '*.staging.netsoc.ie'
+    - main: 'staging.netsoc.ie'
+      sans:
+      - '*.staging.netsoc.ie'
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -118,17 +117,17 @@ metadata:
 spec:
   entryPoints: [websecure]
   routes:
-    - match: Host(`netsoc.tcd.ie`) || Host(`www.netsoc.tcd.ie`)
-      kind: Rule
-      services:
-        - name: noop@internal
-          kind: TraefikService
-      middlewares:
-        - name: tcd-redirect
-          namespace: default
+  - match: Host(`netsoc.tcd.ie`) || Host(`www.netsoc.tcd.ie`)
+    kind: Rule
+    services:
+    - name: noop@internal
+      kind: TraefikService
+    middlewares:
+    - name: tcd-redirect
+      namespace: default
   tls:
     secretName: tls-tcd
     domains:
-      - main: 'netsoc.tcd.ie'
-        sans:
-          - '*.netsoc.tcd.ie'
+    - main: 'netsoc.tcd.ie'
+      sans:
+      - '*.netsoc.tcd.ie'
