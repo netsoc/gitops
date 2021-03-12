@@ -4,3 +4,5 @@ resources:
 - powerdns-pvc.yaml
 - powerdns-secrets.yaml
 - powerdns.yaml
+- powerdns-admin-secrets.yaml
+- powerdns-admin.yaml
