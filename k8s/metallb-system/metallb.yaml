@@ -24,4 +24,5 @@ spec:
         - name: tcd
           protocol: layer2
           addresses:
+            - '134.226.83.27'
             - 134.226.83.100-134.226.83.107
