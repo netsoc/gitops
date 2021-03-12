@@ -20,4 +20,24 @@ spec:
       defaultClassReplicaCount: 3
       reclaimPolicy: Retain
     ingress:
-      enabled: false
+      enabled: true
+      host: longhorn.netsoc.tcd.ie
+      path: '/'
+      tls: true
+      tlsSecret: tls-tcd
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.middlewares: >-
+          longhorn-system-force-forwarded-https@kubernetescrd,kube-system-auth@kubernetescrd
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: force-forwarded-https
+  namespace: longhorn-system
+spec:
+  headers:
+    customRequestHeaders:
+      # This seems to be required due to some weirdness with Traefik and Rancher stuff
+      X-Forwarded-Proto: "https"
