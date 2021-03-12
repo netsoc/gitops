@@ -18,7 +18,8 @@ spec:
     - kind: Secret
       name: powerdns-secrets
   values:
-    env.TZ: Europe/Dublin
+    env:
+      TZ: Europe/Dublin
     postgresql:
       enabled: true
       persistence:
