@@ -1,3 +1,28 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
+kind: ImageRepository
+metadata:
+  name: website
+  namespace: default
+spec:
+  image: ghcr.io/netsoc/website
+  interval: 1m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
+kind: ImagePolicy
+metadata:
+  name: website
+  namespace: default
+spec:
+  imageRepositoryRef:
+    name: website
+  filterTags:
+    pattern: '^[a-fA-F0-9]{8}-(?P<time>\d+)Z$'
+    extract: '$time'
+  policy:
+    numerical:
+      order: asc
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -16,7 +41,7 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/website
-      tag: 0a96f81c-1615584268Z # {"$imagepolicy": "flux-system:website:tag"}
+      tag: 0a96f81c-1615584268Z # {"$imagepolicy": "default:website:tag"}
     replicaCount: 1
     ingress:
       enabled: true
