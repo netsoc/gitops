@@ -1,0 +1,34 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: dashboard
+  namespace: default
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: powerdns
+      version: 3.1.x
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  valuesFrom:
+    - kind: Secret
+      name: powerdns-secrets
+  values:
+    env.TZ: Europe/Dublin
+    postgresql:
+      enabled: true
+      persistence:
+        enabled: true
+        existingClaim: powerdns-postgres
+    service:
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+      #loadBalancerIP: 134.226.83.27
+    powerdns:
+      domain: netsoc.tcd.ie
+      config:
+        allow-axfr-ips: '10.69.0.0/16,134.226.81.11'

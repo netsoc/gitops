@@ -6,3 +6,4 @@ resources:
 - traefik.yaml
 - longhorn.yaml
 - kubernetes-dashboard.yaml
+- k8s-at-home.yaml
