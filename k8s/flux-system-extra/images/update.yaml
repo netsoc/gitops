@@ -15,7 +15,3 @@ spec:
     authorName: fluxcdbot
     messageTemplate: |
       Automated image update
-
-      {{- range .Updated.Images -}}
-       - {{.}}
-      {{- end -}}
