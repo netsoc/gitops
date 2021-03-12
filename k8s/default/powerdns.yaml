@@ -24,6 +24,8 @@ spec:
       persistence:
         enabled: true
         existingClaim: powerdns-postgres
+      volumePermissions:
+        enabled: true
     service:
       type: LoadBalancer
       externalTrafficPolicy: Local
