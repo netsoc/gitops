@@ -44,9 +44,9 @@ spec:
       enabled: true
       type: LoadBalancer
       annotations:
-        metallb.universe.tf/allow-shared-ip: http-primary
+        metallb.universe.tf/allow-shared-ip: ns-http
       spec:
-        loadBalancerIP: '192.168.76.10'
+        loadBalancerIP: '134.226.83.27'
         #externalTrafficPolicy: Local
     ingressRoute:
       dashboard:

@@ -32,11 +32,11 @@ spec:
       externalTrafficPolicy: Local
       loadBalancerIP: 134.226.83.27
       annotations:
-        metallb.universe.tf/allow-shared-ip: dns
+        metallb.universe.tf/allow-shared-ip: ns-http
     powerdns:
       domain: netsoc.tcd.ie
       config:
         default-ttl: 60
-        allow-axfr-ips: '10.69.0.0/16,134.226.81.11'
+        allow-axfr-ips: '10.69.0.0/16,134.226.0.0/16'
         dnsupdate: yes
         allow-dnsupdate-from: ''
