@@ -23,7 +23,7 @@ spec:
       enabled: true
       persistence:
         enabled: true
-        existingClaim: powerdns-postgres
+        size: 2Gi
       volumePermissions:
         enabled: true
     service:
