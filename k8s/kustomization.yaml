@@ -6,5 +6,6 @@ resources:
 - kube-system
 - metallb-system
 - cert-manager
+- longhorn-system
 patchesStrategicMerge:
 - flux-system-patch.yaml
