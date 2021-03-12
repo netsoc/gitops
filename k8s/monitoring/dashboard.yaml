@@ -1,0 +1,32 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: dashboard
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kubernetes-dashboard
+      version: 4.0.x
+      sourceRef:
+        kind: HelmRepository
+        name: kubernetes-dashboard
+        namespace: flux-system
+  values:
+    metricsScraper:
+      enabled: true
+    protocolHttp: true
+    service:
+      externalPort: 80
+    ingress:
+      enabled: true
+      tls:
+        - hosts: [k8s-dash.netsoc.tcd.ie]
+          secretName: tls-tcd
+      hosts: [k8s-dash.netsoc.tcd.ie]
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.middlewares: kube-system-auth@kubernetescrd

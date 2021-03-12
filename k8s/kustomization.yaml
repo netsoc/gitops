@@ -7,5 +7,6 @@ resources:
 - metallb-system
 - cert-manager
 - longhorn-system
+- monitoring
 patchesStrategicMerge:
 - flux-system-patch.yaml
