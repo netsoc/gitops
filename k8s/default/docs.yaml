@@ -1,0 +1,56 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
+kind: ImageRepository
+metadata:
+  name: docs
+  namespace: default
+spec:
+  image: ghcr.io/netsoc/docs
+  interval: 1m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
+kind: ImagePolicy
+metadata:
+  name: docs
+  namespace: default
+spec:
+  imageRepositoryRef:
+    name: docs
+  filterTags:
+    pattern: '^[a-fA-F0-9]{8}-(?P<time>\d+)Z$'
+    extract: '$time'
+  policy:
+    numerical:
+      order: asc
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: docs
+  namespace: default
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: docs
+      version: 0.1.x
+      sourceRef:
+        kind: HelmRepository
+        name: netsoc
+        namespace: flux-system
+  values:
+    image:
+      repository: ghcr.io/netsoc/docs
+      tag: 59e07bcc-1615585485Z # {"$imagepolicy": "default:docs:tag"}
+    replicaCount: 1
+    ingress:
+      enabled: true
+      tls:
+      - hosts: [docs.staging.netsoc.ie]
+        secretName: tls-staging
+      hosts:
+      - host: docs.staging.netsoc.ie
+        paths: [/]
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: 'true'
