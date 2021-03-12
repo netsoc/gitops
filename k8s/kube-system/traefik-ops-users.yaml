@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: traefik-ops-users
+    namespace: kube-system
+data:
+    users: ENC[AES256_GCM,data:UZ3ygmlgrauqsMgvuLZoucuFmrb0EP/PaUrOkJyCRCoy8mApiDVhEIrDlvh5+0erC+/OTPExEfzPKWe34IEWOnAC1bNCSQ7qfmSgp5zE9k/8jnQn1tg7IiC1k5w0zs7RPrAPCeKLKKbXq6MQ7Jz5LorP6uJ7Wp9m,iv:cg/3BzgZJcLQfO7v6RiPDXZ1c+HEIfd1ZtH0j+BCRTA=,tag:cQwCW9wyvj7UzpO9haJNaw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    lastmodified: '2020-09-21T03:31:12Z'
+    mac: ENC[AES256_GCM,data:AEw06ADWyNE2J2yr+hkV81HL9rGUys/qQ9em1AN4XFvWiUZYPDfCvmTSf0IOBdWNzhEU+FS2wVTC1vqgwFIRQAn89gY+Et4/duidODBb7pYOKifok1NoYwGU18rKOJzMjxiIvYu5r8RyLEG49ZhNncFg6P0OvKMyam9JSlUv7lA=,iv:vTH0zzvOlEFawYGy4mm9sgaRTKrC4nTIz7yMU1kd24g=,tag:vZTACzKpmt2hmszWr5GdXg==,type:str]
+    pgp:
+    -   created_at: '2020-09-20T21:28:21Z'
+        enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQGMA5AfX+B6AMX7AQwAln13qevRL7TtBYo8N4EvFK7IlirjPv9jp3JNXILYKTzF
+            Xb20PWwwGES2nGNgrgWvKO3bCh+5Zk5tfLM41Ov7RiE1e/v2rHuadt2jm3Yte4kV
+            gwR6SxcN0C4GCr+demX/wHFUkMtGtDoTylRZObhk1Hc5J5a9M9mm4ZzIUT/P6qWF
+            ARoan0sszCqlJRCKFgUmWm6rER6TxTfEvyYn9lRO12eD+e3iNd0sqfIxYRa4HTzD
+            /7NmtpTpnWbbVjKj0CgzYsaaBXc/qiROIZ0/tVBF+YMCyiA5dMZHrDdTu2JsblYp
+            M2RB0reifRtUluAVvHLH9xQoQPnNX3ee/5MNuvcpweCDkwk9TOlMyIVKwqOPHFnV
+            xt9ufW5uiQb1gUai7XZL7ZAssYbsw7JBA9qApfov0gPS27GMqxjvdCyByhTG6ozx
+            zLztpukVtFyJgOFdoncQXM5+jf6CirP+aumRJRm8sxXAxaVY//8aPNPz1iDEjj8y
+            NrMgJl5bXCZLLNwH6m0/0l4BKAyXW+m+ZuTybOdDTo1GQTwyCiudXQHyr0sqP512
+            B1E80O9iBPmD5ezBUL9sXf8jJ8RH0OhU5hYBag/WL3X3vfRNIve55nhhRQeo9IgE
+            ISZCgjFRy28f98Umj3W6
+            =uhfA
+            -----END PGP MESSAGE-----
+        fp: DB2E28B13D53C8DD62FE560B408F6E592A12DF74
+    encrypted_regex: ^data$
+    version: 3.6.0

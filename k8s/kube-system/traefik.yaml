@@ -43,11 +43,54 @@ spec:
     service:
       enabled: true
       type: LoadBalancer
+      annotations:
+        metallb.universe.tf/allow-shared-ip: primary-http
       spec:
         loadBalancerIP: '192.168.76.10'
         #externalTrafficPolicy: Local
     ingressRoute:
       dashboard:
+        # We want to offer the dashboard on a custom host with auth
         enabled: false
     deployment:
       replicas: 1
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+  namespace: kube-system
+spec:
+  entryPoints: [websecure]
+  routes:
+  - match: Host(`traefik.netsoc.tcd.ie`)
+    kind: Rule
+    services:
+    - name: api@internal
+      kind: TraefikService
+    middlewares:
+    - name: auth
+  tls:
+    secretName: tls-tcd
+    domains:
+    - main: '*.netsoc.tcd.ie'
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: auth
+  namespace: kube-system
+spec:
+  basicAuth:
+    secret: traefik-ops-users
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: dashboard-redirect
+  namespace: kube-system
+spec:
+  redirectRegex:
+    regex: '^https://traefik.netsoc.tcd.ie/(.*)'
+    replacement: 'https://traefik.netsoc.tcd.ie/dashboard/${1}'
+    permanent: true
