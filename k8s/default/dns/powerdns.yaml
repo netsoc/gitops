@@ -30,7 +30,9 @@ spec:
     service:
       type: LoadBalancer
       externalTrafficPolicy: Local
-      #loadBalancerIP: 134.226.83.27
+      loadBalancerIP: 134.226.83.27
+      annotations:
+        metallb.universe.tf/allow-shared-ip: dns
     powerdns:
       domain: netsoc.tcd.ie
       config:
