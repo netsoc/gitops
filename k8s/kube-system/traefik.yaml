@@ -47,7 +47,7 @@ spec:
         metallb.universe.tf/allow-shared-ip: ns-http
       spec:
         loadBalancerIP: '134.226.83.27'
-        #externalTrafficPolicy: Local
+        externalTrafficPolicy: Local
     ingressRoute:
       dashboard:
         # We want to offer the dashboard on a custom host with auth
