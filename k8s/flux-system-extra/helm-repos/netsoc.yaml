@@ -5,5 +5,5 @@ metadata:
   name: netsoc
   namespace: flux-system
 spec:
-  interval: 5m0s
+  interval: 1m0s
   url: https://netsoc.github.io/charts/
