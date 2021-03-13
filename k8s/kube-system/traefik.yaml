@@ -17,7 +17,7 @@ spec:
   values:
     logs:
       general:
-        level: DEBUG
+        level: INFO
       access:
         enabled: true
     providers:
@@ -47,7 +47,7 @@ spec:
         metallb.universe.tf/allow-shared-ip: http
       spec:
         loadBalancerIP: '134.226.83.67'
-        #externalTrafficPolicy: Local
+        externalTrafficPolicy: Local
     ingressRoute:
       dashboard:
         # We want to offer the dashboard on a custom host with auth
