@@ -30,3 +30,35 @@ spec:
               annotations:
                 traefik.ingress.kubernetes.io/router.entrypoints: websecure
                 traefik.ingress.kubernetes.io/router.tls: 'true'
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+  namespace: cert-manager
+spec:
+  acme:
+    email: internet@csc.tcd.ie
+    server: https://acme-v02.api.letsencrypt.org/directory
+    disableAccountKeyGeneration: true
+    privateKeySecretRef:
+      name: letsencrypt-account-key
+    solvers:
+    - dns01:
+        rfc2136:
+          nameserver: powerdns-udp.default
+          tsigKeyName: 'cert-manager.'
+          tsigAlgorithm: HMACSHA512
+          tsigSecretSecretRef:
+            name: powerdns-tsig
+            key: cert-manager.key
+      selector:
+        dnsZones: ['staging.netsoc.ie']
+    - http01:
+        ingress:
+          serviceType: ClusterIP
+          ingressTemplate:
+            metadata:
+              annotations:
+                traefik.ingress.kubernetes.io/router.entrypoints: websecure
+                traefik.ingress.kubernetes.io/router.tls: 'true'

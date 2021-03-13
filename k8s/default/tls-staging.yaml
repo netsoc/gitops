@@ -10,5 +10,5 @@ spec:
     - '*.staging.netsoc.ie'
   issuerRef:
     kind: ClusterIssuer
-    name: letsencrypt-staging
+    name: letsencrypt
   secretName: tls-staging
