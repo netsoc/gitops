@@ -40,3 +40,5 @@ spec:
         allow-axfr-ips: '10.69.0.0/16,134.226.0.0/16'
         dnsupdate: yes
         allow-dnsupdate-from: ''
+        resolver: '127.0.0.1'
+        expand-alias: yes
