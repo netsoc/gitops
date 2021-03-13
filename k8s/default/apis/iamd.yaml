@@ -1,0 +1,60 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: iamd
+  namespace: default
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: iamd
+      version: 0.3.x
+      sourceRef:
+        kind: HelmRepository
+        name: netsoc
+        namespace: flux-system
+  valuesFrom:
+    - kind: Secret
+      name: iamd-secrets
+    - kind: ConfigMap
+      name: iamd-reserved-users
+  values:
+    replicaCount: 1
+    ingress:
+      enabled: true
+      tls:
+      - hosts: [iam.staging.netsoc.ie]
+        secretName: tls-staging
+      hosts:
+      - host: iam.staging.netsoc.ie
+        paths: [/]
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+    postgresql:
+      enabled: true
+      persistence:
+        enabled: true
+        size: 2Gi
+      volumePermissions:
+        enabled: true
+    config:
+      log_level: DEBUG
+      postgresql:
+        soft_delete: false
+      mail:
+        from: '"Netsoc IAM (staging)" <iamd@mg.netsoc.ie>'
+        reply_to: '"Netsoc support" <support@netsoc.ie>'
+        verify_url: 'https://accounts.staging.netsoc.ie/verify?token={{.Token}}'
+        reset_url: 'https://accounts.staging.netsoc.ie/reset?token={{.Token}}'
+        smtp:
+          host: smtp.eu.mailgun.org
+          port: 587
+          username: iamd@mg.netsoc.ie
+          tls: true
+      jwt:
+        issuer: netsoc
+        login_validity: 8760h
+        email_validity: 24h
+      ma1sd:
+        http_address: ':8008'
