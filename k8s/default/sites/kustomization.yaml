@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
 - website.yaml
 - docs.yaml
+- accounts-secrets.yaml
+- accounts.yaml

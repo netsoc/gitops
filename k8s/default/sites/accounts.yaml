@@ -1,0 +1,40 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: accounts
+  namespace: default
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: accounts
+      version: 0.1.x
+      sourceRef:
+        kind: HelmRepository
+        name: netsoc
+        namespace: flux-system
+  valuesFrom:
+    - kind: Secret
+      name: accounts-secrets
+  values:
+    ingress:
+      enabled: true
+      tls:
+      - hosts: [accounts.staging.netsoc.ie]
+        secretName: tls-staging
+      hosts: [accounts.staging.netsoc.ie]
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+
+    frontend:
+      config:
+        IAM_BASE_URL: 'https://iam.staging.netsoc.ie/v1'
+        PAYMENT_BASE_URL: https://accounts.staging.netsoc.ie/api
+        STRIPE_PUBLIC_KEY: 'pk_test_514gI43BPJxpSdBx8136Z5VZi5cXo7zG4XiHR4fGXDrM5F3PMTadUxO0CTub1ubTQvgqLLYBOwOdTukfWNMzonMyO00GQDkOEDt'
+        MAIN_WEBSITE_URL: 'https://www.staging.netsoc.ie/services/'
+
+    backend:
+      config:
+        ACCOUNTS_BASE_URL: https://accounts.staging.netsoc.ie
+        IAM_BASE_URL: http://iamd/v1
