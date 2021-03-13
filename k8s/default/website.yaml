@@ -10,8 +10,8 @@ spec:
       chart: website
       version: 0.1.x
       sourceRef:
-        kind: HelmRepository
-        name: netsoc
+        kind: GitRepository
+        name: netsoc-charts
         namespace: flux-system
   values:
     image:
