@@ -46,7 +46,7 @@ spec:
       annotations:
         metallb.universe.tf/allow-shared-ip: http
       spec:
-        loadBalancerIP: '134.226.83.67'
+        loadBalancerIP: '134.226.83.100'
         externalTrafficPolicy: Local
     ingressRoute:
       dashboard:
