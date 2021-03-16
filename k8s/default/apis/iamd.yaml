@@ -47,11 +47,11 @@ spec:
         reply_to: '"Netsoc support" <support@netsoc.ie>'
         verify_url: 'https://accounts.staging.netsoc.ie/verify?token={{.Token}}'
         reset_url: 'https://accounts.staging.netsoc.ie/reset?token={{.Token}}'
-        smtp:
-          host: smtp.eu.mailgun.org
-          port: 587
-          username: iamd@mg.netsoc.ie
-          tls: true
+      smtp:
+        host: smtp.eu.mailgun.org
+        port: 587
+        username: iamd@mg.netsoc.ie
+        tls: true
       jwt:
         issuer: netsoc
         login_validity: 8760h
