@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+- cert-manager
+- kube-system
 - metallb-system
-- monitoring
-configurations:
-- kustomize-helm-values.yaml
+- longhorn-system
