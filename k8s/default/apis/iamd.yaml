@@ -16,8 +16,6 @@ spec:
   valuesFrom:
     - kind: Secret
       name: iamd-secrets
-    - kind: ConfigMap
-      name: iamd-reserved-users
   values:
     replicaCount: 1
     ingress:
