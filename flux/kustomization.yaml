@@ -4,4 +4,5 @@ resources:
 - flux-system
 - helm-repos
 - images
+- infrastructure.yaml
 - apps.yaml
