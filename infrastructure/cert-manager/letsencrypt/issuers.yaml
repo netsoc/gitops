@@ -10,7 +10,8 @@ spec:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     disableAccountKeyGeneration: true
     privateKeySecretRef:
-      name: letsencrypt-staging-account-key
+      name: letsencrypt-account-keys
+      key: tls-staging.key
     solvers:
     - dns01:
         rfc2136:
@@ -42,7 +43,8 @@ spec:
     server: https://acme-v02.api.letsencrypt.org/directory
     disableAccountKeyGeneration: true
     privateKeySecretRef:
-      name: letsencrypt-account-key
+      name: letsencrypt-account-keys
+      key: tls.key
     solvers:
     - dns01:
         rfc2136:
