@@ -5,6 +5,7 @@ resources:
 - kube-system
 - metallb-system
 - longhorn-system
+- default
 secretGenerator:
 - namespace: kube-system
   name: tls-tcd
@@ -19,4 +20,4 @@ secretGenerator:
   - tls.crt=common/netsoc.tcd.ie.crt
   - tls.key=common/netsoc.tcd.ie.key
 configurations:
-- tls-refs.yaml
+- secret-refs.yaml
