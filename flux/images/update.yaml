@@ -12,15 +12,13 @@ spec:
   git:
     commit:
       author:
-        email: fluxcdbot@users.noreply.github.com
-        name: fluxcdbot
+        email: internet@csc.tcd.ie
+        name: NetsocBot
       signingKey:
         secretRef:
           name: pgp
       messageTemplate: |
         Automated image update
-
-        Automation name: {{ .AutomationObject }}
 
         Files:
         {{ range $filename, $_ := .Updated.Files -}}
