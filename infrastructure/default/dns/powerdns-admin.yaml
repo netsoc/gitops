@@ -4,7 +4,6 @@ kind: HelmRelease
 metadata:
   name: powerdns-admin
 spec:
-  suspend: true
   interval: 5m
   chart:
     spec:
