@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
 - _namespace.yaml
 - longhorn.yaml
-- tls-tcd.yaml

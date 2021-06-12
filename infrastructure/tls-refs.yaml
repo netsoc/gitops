@@ -1,0 +1,8 @@
+nameReference:
+- kind: Secret
+  version: v1
+  fieldSpecs:
+  - kind: IngressRoute
+    path: spec/tls/secretName
+  - kind: HelmRelease
+    path: spec/values/ingress/tlsSecret
