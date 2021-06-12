@@ -3,7 +3,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: traefik
-  namespace: kube-system
 spec:
   interval: 5m
   chart:
@@ -61,7 +60,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: traefik-dashboard
-  namespace: kube-system
 spec:
   entryPoints: [websecure]
   routes:
@@ -81,7 +79,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: auth
-  namespace: kube-system
 spec:
   basicAuth:
     secret: traefik-ops-users
@@ -90,7 +87,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: dashboard-redirect
-  namespace: kube-system
 spec:
   redirectRegex:
     regex: '^https://traefik.netsoc.tcd.ie/(.*)'

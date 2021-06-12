@@ -4,11 +4,9 @@ resources:
 - issuers.yaml
 secretGenerator:
 - name: letsencrypt-account-keys
-  namespace: cert-manager
   files:
   - tls-staging.key=account-staging.key
   - tls.key=account.key
 - name: powerdns-tsig
-  namespace: cert-manager
   files:
   - cert-manager.key=pdns-cert-manager.key

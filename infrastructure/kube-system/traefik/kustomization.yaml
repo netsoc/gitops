@@ -3,8 +3,7 @@ kind: Kustomization
 resources:
 - helm.yaml
 secretGenerator:
-- namespace: kube-system
-  name: traefik-ops-users
+- name: traefik-ops-users
   files:
   - users=users.htpasswd
 configurations:

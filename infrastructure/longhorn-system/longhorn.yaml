@@ -3,7 +3,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: longhorn
-  namespace: longhorn-system
 spec:
   interval: 5m
   chart:
@@ -35,7 +34,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: force-forwarded-https
-  namespace: longhorn-system
 spec:
   headers:
     customRequestHeaders:
