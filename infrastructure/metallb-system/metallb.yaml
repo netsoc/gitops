@@ -17,10 +17,6 @@ spec:
   values:
     configInline:
       address-pools:
-        - name: azure
-          protocol: layer2
-          addresses:
-            - 192.168.76.10-192.168.76.12
         - name: tcd
           protocol: layer2
           addresses:
