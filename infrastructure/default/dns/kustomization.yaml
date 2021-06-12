@@ -7,5 +7,5 @@ resources:
 secretGenerator:
 - name: dns-secrets
   files:
-  - dbPassword=secrets/db-password.txt
+  - dbPassword=secrets/db-password.bin
   - powerdns-values.yaml=secrets/powerdns.yaml
