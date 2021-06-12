@@ -35,6 +35,10 @@ spec:
         size: 2Gi
       volumePermissions:
         enabled: true
+      initdbScripts:
+        powerdns-admin.sql: |
+          CREATE DATABASE powerdnsadmin;
+          GRANT ALL PRIVILEGES ON DATABASE powerdnsadmin to pdns;
     service:
       type: LoadBalancer
       externalTrafficPolicy: Local

@@ -23,7 +23,7 @@ spec:
       type: postgres
       host: powerdns-postgresql
       username: pdns
-      database: pdns
+      database: powerdnsadmin
     ingress:
       enabled: true
       hosts:
