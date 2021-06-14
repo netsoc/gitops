@@ -2,6 +2,12 @@ nameReference:
 - kind: Secret
   version: v1
   fieldSpecs:
+  - kind: HelmRelease
+    path: spec/valuesFrom/name
+  - kind: IngressRoute
+    path: spec/tls/secretName
+  - kind: Middleware
+    path: spec/basicAuth/secret
   - kind: ClusterIssuer
     path: spec/acme/privateKeySecretRef/name
   - kind: ClusterIssuer

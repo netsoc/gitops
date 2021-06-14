@@ -13,11 +13,15 @@ secretGenerator:
   files:
   - tls.crt=common/netsoc.tcd.ie.crt
   - tls.key=common/netsoc.tcd.ie.key
+  options:
+    disableNameSuffixHash: true
 - namespace: longhorn-system
   name: tls-tcd
   type: kubernetes.io/tls
   files:
   - tls.crt=common/netsoc.tcd.ie.crt
   - tls.key=common/netsoc.tcd.ie.key
+  options:
+    disableNameSuffixHash: true
 configurations:
-- secret-refs.yaml
+- namerefs.yaml

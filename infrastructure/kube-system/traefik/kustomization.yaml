@@ -6,5 +6,3 @@ secretGenerator:
 - name: traefik-ops-users
   files:
   - users=secrets/users.htpasswd
-configurations:
-- secret-refs.yaml
