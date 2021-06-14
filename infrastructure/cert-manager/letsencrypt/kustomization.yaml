@@ -5,8 +5,8 @@ resources:
 secretGenerator:
 - name: letsencrypt-account-keys
   files:
-  - tls-staging.key=account-staging.key
-  - tls.key=account.key
+  - tls-staging.key=secrets/account-staging.key
+  - tls.key=secrets/account.key
 - name: powerdns-tsig
   files:
-  - cert-manager.key=pdns-cert-manager.key
+  - cert-manager.key=secrets/pdns-cert-manager.key
