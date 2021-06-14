@@ -3,7 +3,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: dashboard
-  namespace: monitoring
 spec:
   interval: 5m
   chart:
@@ -45,7 +44,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: kubernetes-dashboard
-  namespace: monitoring
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
