@@ -33,7 +33,7 @@ spec:
       enabled: true
       persistence:
         enabled: true
-        size: 2Gi
+        existingClaim: powerdns-postgresql
       volumePermissions:
         enabled: true
       initdbScripts:

@@ -16,7 +16,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: data-powerdns-postgresql-0
+  name: powerdns-postgresql
 spec:
   volumeMode: Filesystem
   accessModes: [ReadWriteOnce]
