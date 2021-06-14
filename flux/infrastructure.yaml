@@ -32,3 +32,32 @@ spec:
     provider: sops
     secretRef:
       name: pgp
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v1beta1
+      kind: HelmRelease
+      namespace: metallb-system
+      name: metallb
+    - apiVersion: helm.toolkit.fluxcd.io/v1beta1
+      kind: HelmRelease
+      namespace: longhorn-system
+      name: longhorn
+    - apiVersion: helm.toolkit.fluxcd.io/v1beta1
+      kind: HelmRelease
+      namespace: cert-manager
+      name: cert-manager
+    - apiVersion: helm.toolkit.fluxcd.io/v1beta1
+      kind: HelmRelease
+      namespace: kube-system
+      name: traefik
+    - apiVersion: helm.toolkit.fluxcd.io/v1beta1
+      kind: HelmRelease
+      namespace: default
+      name: powerdns
+    - apiVersion: helm.toolkit.fluxcd.io/v1beta1
+      kind: HelmRelease
+      namespace: default
+      name: powerdns-admin
+    - apiVersion: helm.toolkit.fluxcd.io/v1beta1
+      kind: HelmRelease
+      namespace: monitoring
+      name: dashboard
