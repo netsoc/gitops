@@ -5,4 +5,5 @@ resources:
 - tls-staging.yaml
 - iamd
 - website.yaml
+- docs.yaml
 #- sites
