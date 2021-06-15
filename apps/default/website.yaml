@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -16,7 +15,7 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/website
-      tag: 68d8b7f9-1615585306Z # {"$imagepolicy": "flux-system:website:tag"}
+      tag: 5bab3252-1623720028Z # {"$imagepolicy": "flux-system:website:tag"}
     replicaCount: 1
     ingress:
       enabled: true
