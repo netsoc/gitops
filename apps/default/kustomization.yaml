@@ -4,4 +4,5 @@ namespace: default
 resources:
 - tls-staging.yaml
 - iamd
+- website.yaml
 #- sites

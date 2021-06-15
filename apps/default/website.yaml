@@ -1,8 +1,8 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: website
-  namespace: default
 spec:
   interval: 1m
   chart:
@@ -35,7 +35,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: cli-redirect
-  namespace: default
 spec:
   redirectRegex:
     regex: '^https://www.staging.netsoc.ie/cli/?$'
@@ -46,7 +45,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: meetings-redirect
-  namespace: default
 spec:
   redirectRegex:
     regex: '^https://www.staging.netsoc.ie/meeting/?$'
@@ -57,7 +55,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: events-redirect
-  namespace: default
 spec:
   redirectRegex:
     regex: '^https://www.staging.netsoc.ie/event/?$'
@@ -68,7 +65,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: www-redirect
-  namespace: default
 spec:
   redirectRegex:
     regex: '^https://staging.netsoc.ie/(.*)'
@@ -79,7 +75,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: www-redirect
-  namespace: default
 spec:
   entryPoints: [websecure]
   routes:
@@ -102,7 +97,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: tcd-redirect
-  namespace: default
 spec:
   redirectRegex:
     regex: '^https://(.*)netsoc.tcd.ie/(.*)'
@@ -113,7 +107,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: tcd-redirect
-  namespace: default
 spec:
   entryPoints: [websecure]
   routes:
