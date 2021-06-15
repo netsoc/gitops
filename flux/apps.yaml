@@ -5,6 +5,8 @@ metadata:
   name: apps
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure
   interval: 10m0s
   sourceRef:
     kind: GitRepository
@@ -15,4 +17,4 @@ spec:
   decryption:
     provider: sops
     secretRef:
-      name: sops-pgp
+      name: pgp
