@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
 - default
 configurations:
-- kustomize-helm-values.yaml
+- namerefs.yaml
