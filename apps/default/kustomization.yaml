@@ -6,4 +6,4 @@ resources:
 - iamd
 - website.yaml
 - docs.yaml
-#- sites
+- accounts
