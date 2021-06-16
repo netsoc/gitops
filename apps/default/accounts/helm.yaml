@@ -30,7 +30,7 @@ spec:
       config:
         IAM_BASE_URL: 'https://iam.staging.netsoc.ie/v1'
         PAYMENT_BASE_URL: https://accounts.staging.netsoc.ie/api
-        STRIPE_PUBLIC_KEY: 'pk_test_514gI43BPJxpSdBx8136Z5VZi5cXo7zG4XiHR4fGXDrM5F3PMTadUxO0CTub1ubTQvgqLLYBOwOdTukfWNMzonMyO00GQDkOEDt'
+        STRIPE_PUBLIC_KEY: 'pk_test_514gI43BPJxpSdBx8esUHmCoU4mRICB29h5HewGIMpiARXL8IFcDMNpqM7ztJqPOotPvKkobkwIC0fSymYNbL9KGn000DMtyT58'
         MAIN_WEBSITE_URL: 'https://www.staging.netsoc.ie/services/'
 
     backend:
