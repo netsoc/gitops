@@ -1,0 +1,26 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: whoami
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: docs
+      version: 0.3.x
+      sourceRef:
+        kind: HelmRepository
+        name: halkeye
+        namespace: flux-system
+  values:
+    replicaCount: 1
+    ingress:
+      enabled: true
+      tls:
+        - hosts: [docs.staging.netsoc.ie]
+          secretName: tls-staging
+      hosts: [whoami.netsoc.tcd.ie]
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: 'true'
