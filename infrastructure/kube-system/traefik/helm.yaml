@@ -46,10 +46,11 @@ spec:
       type: LoadBalancer
       annotations:
         metallb.universe.tf/allow-shared-ip: http
+        service.kubernetes.io/topology-aware-hints: auto
       spec:
         loadBalancerIP: '134.226.83.100'
         # Unfortunately we'll lose source IP with this, but Local is awkward and breaks things :(
-        externalTrafficPolicy: Local
+        externalTrafficPolicy: Cluster
     ingressRoute:
       dashboard:
         # We want to offer the dashboard on a custom host with auth
