@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: website
-      version: 0.1.x
+      version: 0.1.0
       sourceRef:
         kind: HelmRepository
         name: netsoc
