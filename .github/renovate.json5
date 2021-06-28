@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "timezone": "Europe/Dublin",
-  "includePaths": ["infrastructure", "apps"],
+  "includePaths": ["infrastructure/**", "apps/**"],
 
   "semanticCommits": "enabled",
 
