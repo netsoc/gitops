@@ -7,6 +7,7 @@ spec:
   interval: 5m
   chart:
     spec:
+      # renovate: registryUrl=https://halkeye.github.io/helm-charts/
       chart: powerdnsadmin
       version: 0.3.1
       sourceRef:

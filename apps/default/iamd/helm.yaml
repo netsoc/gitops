@@ -6,6 +6,7 @@ spec:
   interval: 1m
   chart:
     spec:
+      # renovate: registryUrl=https://netsoc.github.io/charts/
       chart: iamd
       version: 0.5.0
       sourceRef:
