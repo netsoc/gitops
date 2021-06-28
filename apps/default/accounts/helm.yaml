@@ -6,6 +6,7 @@ spec:
   interval: 1m
   chart:
     spec:
+      # renovate: registryUrl=https://netsoc.github.io/charts/
       chart: accounts
       version: 0.1.8
       sourceRef:
