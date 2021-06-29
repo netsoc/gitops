@@ -8,4 +8,5 @@ resources:
 - kubernetes-dashboard.yaml
 - k8s-at-home.yaml
 - halkeye.yaml
+- ananace.yaml
 - netsoc.yaml
