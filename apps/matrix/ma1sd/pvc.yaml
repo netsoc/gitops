@@ -11,7 +11,7 @@ spec:
   storageClassName: longhorn
   csi:
     driver: driver.longhorn.io
-    volumeHandle: iamd-postgresql
+    volumeHandle: ma1sd
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -23,5 +23,5 @@ spec:
   resources:
     requests:
       storage: 128Mi
-  volumeName: iamd-postgresql
+  volumeName: ma1sd
   storageClassName: longhorn
