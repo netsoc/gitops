@@ -96,7 +96,10 @@ spec:
     postgresql:
       enabled: true
       persistence:
+        enabled: true
         existingClaim: synapse-postgresql
+      volumePermissions:
+        enabled: true
 
     redis:
       enabled: true
@@ -106,6 +109,15 @@ spec:
       existingClaim: synapse-media
     volumePermissions:
       enabled: true
+
+      # The media worker's values are wrong :(
+      repository: alpine
+      tag: latest
+      pullPolicy: Always
+      image:
+        repository: alpine
+        tag: latest
+        pullPolicy: Always
 
     service:
       port: 8008
