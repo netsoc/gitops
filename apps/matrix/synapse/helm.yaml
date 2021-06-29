@@ -7,10 +7,10 @@ spec:
   chart:
     spec:
       chart: matrix-synapse
-      version: 2.1.1
+      version: 0.1.0
       sourceRef:
         kind: HelmRepository
-        name: ananace
+        name: netsoc
         namespace: flux-system
   valuesFrom:
     - kind: Secret
@@ -81,9 +81,44 @@ spec:
         initialDelaySeconds: 30
 
     workers:
+      default:
+        extraCommands:
+          - apt-get update -qyy && apt-get install curl unzip -yqq
+          - curl -Lo /tmp/rest-provider.zip https://github.com/devplayer0/matrix-synapse-rest-password-provider/archive/master.zip
+          - cd /tmp && unzip rest-provider.zip
+          - cd /tmp/matrix-synapse-rest-password-provider-master && python setup.py install
+        livenessProbe:
+          # Give the extra commands a chance to run
+          initialDelaySeconds: 30
       generic_worker:
         enabled: true
         replicaCount: 2
+        csPaths: # Set all of these since the login endpoint should be overridden by ma1sd
+        # - "/_matrix/client/(v2_alpha|r0)/sync"
+          - "/_matrix/client/(api/v1|v2_alpha|r0)/events"
+        # - "/_matrix/client/(api/v1|r0)/initialSync"
+        # - "/_matrix/client/(api/v1|r0)/rooms/[^/]+/initialSync"
+          - "/_matrix/client/(api/v1|r0|unstable)/publicRooms"
+          - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/joined_members"
+          - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/context/.*"
+          - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/members"
+          - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/state"
+          - "/_matrix/client/(api/v1|r0|unstable)/account/3pid"
+          - "/_matrix/client/(api/v1|r0|unstable)/keys/query"
+          - "/_matrix/client/(api/v1|r0|unstable)/keys/changes"
+          - "/_matrix/client/versions"
+          - "/_matrix/client/(api/v1|r0|unstable)/voip/turnServer"
+          - "/_matrix/client/(api/v1|r0|unstable)/joined_groups"
+          - "/_matrix/client/(api/v1|r0|unstable)/publicised_groups"
+          - "/_matrix/client/(api/v1|r0|unstable)/publicised_groups/"
+        # - "/_matrix/client/(api/v1|r0|unstable)/login"
+          - "/_matrix/client/(r0|unstable)/register"
+          - "/_matrix/client/(r0|unstable)/auth/.*/fallback/web"
+          - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/send"
+          - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/state/"
+          - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/(join|invite|leave|ban|unban|kick)"
+          - "/_matrix/client/(api/v1|r0|unstable)/join/"
+          - "/_matrix/client/(api/v1|r0|unstable)/profile/"
       pusher:
         enabled: true
       federation_sender:
@@ -110,10 +145,6 @@ spec:
     volumePermissions:
       enabled: true
 
-      # The media worker's values are wrong :(
-      repository: alpine
-      tag: latest
-      pullPolicy: Always
       image:
         repository: alpine
         tag: latest
@@ -137,14 +168,6 @@ spec:
 
       paths:
         - path: /_matrix/identity
-          backend:
-            serviceName: matrix-ma1sd
-            servicePort: 8090
-        - path: /_matrix/client/r0/user_directory
-          backend:
-            serviceName: matrix-ma1sd
-            servicePort: 8090
-        - path: /_matrix/client/r0/login
           backend:
             serviceName: matrix-ma1sd
             servicePort: 8090
