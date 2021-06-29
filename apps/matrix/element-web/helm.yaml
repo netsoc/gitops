@@ -6,6 +6,7 @@ spec:
   interval: 1m
   chart:
     spec:
+      # renovate: registryUrl=https://ananace.gitlab.io/charts/
       chart: element-web
       version: 1.0.27
       sourceRef:
