@@ -21,11 +21,11 @@ spec:
     ingress:
       enabled: true
       tls:
-      - hosts: [iam.staging.netsoc.ie]
-        secretName: tls-staging
+        - hosts: [iam.staging.netsoc.ie]
+          secretName: tls-staging
       hosts:
-      - host: iam.staging.netsoc.ie
-        paths: [/]
+        - host: iam.staging.netsoc.ie
+          paths: [/]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
@@ -58,3 +58,4 @@ spec:
         max_age: 72h
       ma1sd:
         http_address: ':8008'
+        domain: staging.netsoc.ie
