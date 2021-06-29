@@ -24,8 +24,8 @@ spec:
 
     defaultServer:
       url: https://matrix.staging.netsoc.ie
-      name: netsoc.ie
-      identity_server: https://matrix.netsoc.ie
+      name: staging.netsoc.ie
+      identity_server: https://matrix.staging.netsoc.ie
 
     config:
       disable_custom_urls: true
