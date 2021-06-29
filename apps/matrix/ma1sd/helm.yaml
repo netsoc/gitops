@@ -27,10 +27,10 @@ spec:
           homeserver:
             client:
               - name: 'matrix.staging.netsoc.ie'
-                value: 'http://matrix-synapse:8008'
+                value: 'http://synapse-matrix-synapse:8008'
               - name: 'staging.netsoc.ie'
-                value: 'http://matrix-synapse:8008'
+                value: 'http://synapse-matrix-synapse:8008'
 
       rest:
         enabled: true
-        host: http://default-iamd.default:8008
+        host: http://iamd.default:8008

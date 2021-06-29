@@ -169,20 +169,20 @@ spec:
       paths:
         - path: /_matrix/identity
           backend:
-            serviceName: matrix-ma1sd
+            serviceName: ma1sd
             servicePort: 8090
       csPaths:
         - path: /_matrix/identity
           backend:
-            serviceName: matrix-ma1sd
+            serviceName: ma1sd
             servicePort: 8090
         - path: /_matrix/client/r0/user_directory
           backend:
-            serviceName: matrix-ma1sd
+            serviceName: ma1sd
             servicePort: 8090
         - path: /_matrix/client/r0/login
           backend:
-            serviceName: matrix-ma1sd
+            serviceName: ma1sd
             servicePort: 8090
 
       tls:
