@@ -1,0 +1,155 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: synapse
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: matrix-synapse
+      version: 2.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: ananace
+        namespace: flux-system
+  valuesFrom:
+    - kind: Secret
+      name: synapse-extras
+  values:
+    signingkey:
+      job:
+        enabled: false
+      existingSecret: synapse-extras
+      existingSecretKey: signing.key
+
+    serverName: staging.netsoc.ie
+    publicServerName: matrix.staging.netsoc.ie
+
+    config:
+      logLevel: INFO
+
+      enableRegistration: false
+
+    extraConfig:
+      max_upload_size: 128M
+      max_image_pixels: 32M
+
+      url_preview_enabled: true
+      url_preview_ip_range_blacklist:
+        - '127.0.0.0/8'
+        - '10.0.0.0/8'
+        - '172.16.0.0/12'
+        - '192.168.0.0/16'
+        - '100.64.0.0/10'
+        - '192.0.0.0/24'
+        - '169.254.0.0/16'
+        - '192.88.99.0/24'
+        - '198.18.0.0/15'
+        - '192.0.2.0/24'
+        - '198.51.100.0/24'
+        - '203.0.113.0/24'
+        - '224.0.0.0/4'
+        - '::1/128'
+        - 'fe80::/10'
+        - 'fc00::/7'
+        - '2001:db8::/32'
+        - 'ff00::/8'
+        - 'fec0::/10'
+
+      allow_guest_access: false
+      trusted_third_party_id_servers: [matrix.staging.netsoc.ie]
+      password_providers:
+        - module: rest_auth_provider.RestAuthProvider
+          config:
+            endpoint: 'http://matrix-ma1sd:8090'
+            policy:
+              registration:
+                profile:
+                  name: true
+              login:
+                profile:
+                  name: false
+
+    synapse:
+      extraCommands:
+        - apt-get update -qyy && apt-get install curl unzip -yqq
+        - curl -Lo /tmp/rest-provider.zip https://github.com/devplayer0/matrix-synapse-rest-password-provider/archive/master.zip
+        - cd /tmp && unzip rest-provider.zip
+        - cd /tmp/matrix-synapse-rest-password-provider-master && python setup.py install
+      livenessProbe:
+        # Give the extra commands a chance to run
+        initialDelaySeconds: 30
+
+    workers:
+      generic_worker:
+        enabled: true
+        replicaCount: 2
+      pusher:
+        enabled: true
+      federation_sender:
+        enabled: true
+      media_repository:
+        enabled: true
+      frontend_proxy:
+        enabled: true
+
+    postgresql:
+      enabled: true
+      persistence:
+        existingClaim: synapse-postgresql
+
+    redis:
+      enabled: true
+
+    persistence:
+      enabled: true
+      existingClaim: synapse-media
+    volumePermissions:
+      enabled: true
+
+    service:
+      port: 8008
+
+    ingress:
+      enabled: true
+      traefikPaths: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+
+      includeServerName: true
+      includeUnderscoreSynapse: true
+
+      hosts: [matrix.staging.netsoc.ie]
+      csHosts: [matrix.staging.netsoc.ie]
+
+      paths:
+        - path: /_matrix/identity
+          backend:
+            serviceName: matrix-ma1sd
+            servicePort: 8090
+        - path: /_matrix/client/r0/user_directory
+          backend:
+            serviceName: matrix-ma1sd
+            servicePort: 8090
+        - path: /_matrix/client/r0/login
+          backend:
+            serviceName: matrix-ma1sd
+            servicePort: 8090
+      csPaths:
+        - path: /_matrix/identity
+          backend:
+            serviceName: matrix-ma1sd
+            servicePort: 8090
+        - path: /_matrix/client/r0/user_directory
+          backend:
+            serviceName: matrix-ma1sd
+            servicePort: 8090
+        - path: /_matrix/client/r0/login
+          backend:
+            serviceName: matrix-ma1sd
+            servicePort: 8090
+
+      tls:
+        - secretName: tls-main
+          hosts: [matrix.staging.netsoc.ie]

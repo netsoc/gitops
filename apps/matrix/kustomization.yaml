@@ -3,5 +3,6 @@ kind: Kustomization
 namespace: matrix
 resources:
 - _namespace.yaml
+- synapse
 - ma1sd
 - element-web

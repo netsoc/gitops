@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: synapse-postgresql
+spec:
+  volumeMode: Filesystem
+  accessModes: [ReadWriteOnce]
+  capacity:
+    storage: 256Gi
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    volumeHandle: synapse-postgresql
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: synapse-postgresql
+spec:
+  volumeMode: Filesystem
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 256Gi
+  volumeName: synapse-postgresql
+  storageClassName: longhorn

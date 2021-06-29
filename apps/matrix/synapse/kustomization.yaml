@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- postgres-pvc.yaml
+- media-pvc.yaml
+- helm.yaml
+secretGenerator:
+- name: synapse-extras
+  files:
+  - signing.key=secrets/signing.key
+  - values.yaml=secrets/values.yaml
+  options:
+    disableNameSuffixHash: true
