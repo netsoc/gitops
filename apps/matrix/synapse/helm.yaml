@@ -61,7 +61,7 @@ spec:
       password_providers:
         - module: rest_auth_provider.RestAuthProvider
           config:
-            endpoint: 'http://matrix-ma1sd:8090'
+            endpoint: 'http://ma1sd:8090'
             policy:
               registration:
                 profile:
