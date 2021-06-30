@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -17,16 +16,16 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/docs
-      tag: a04ba33c-1623793099Z # {"$imagepolicy": "flux-system:docs:tag"}
+      tag: 0c374b43-1625052839Z # {"$imagepolicy": "flux-system:docs:tag"}
     replicaCount: 1
     ingress:
       enabled: true
       tls:
-      - hosts: [docs.staging.netsoc.ie]
-        secretName: tls-staging
+        - hosts: [docs.staging.netsoc.ie]
+          secretName: tls-staging
       hosts:
-      - host: docs.staging.netsoc.ie
-        paths: [/]
+        - host: docs.staging.netsoc.ie
+          paths: [/]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
