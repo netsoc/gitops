@@ -1,0 +1,2 @@
+- devicematch: ^kvm$
+  nummaxdevices: 110
