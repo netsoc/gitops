@@ -126,6 +126,8 @@ spec:
         enabled: true
       media_repository:
         enabled: true
+        strategy:
+          type: Recreate
       frontend_proxy:
         enabled: true
 
