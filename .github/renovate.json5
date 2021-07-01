@@ -14,7 +14,7 @@
   // Do not rebase PRs
   "rebaseWhen": "conflicted",
 
-  "enabledManagers": ["regex"],
+  "enabledManagers": ["regex", "kubernetes"],
   "regexManagers": [
     {
       "fileMatch": [".+\\.yaml$"],
@@ -24,12 +24,20 @@
       "datasourceTemplate": "helm"
     }
   ],
+  "kubernetes": {
+    "fileMatch": [".+\\.yaml$"],
+  },
 
   "packageRules": [
     // Setup data sources
     {
       "matchDatasources": ["helm"],
       "commitMessageTopic": "Helm chart {{depName}}"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "commitMessageTopic": "Docker image {{depName}}",
+      "commitMessageExtra": "to {{#if isSingleVersion}}{{{newVersion}}}{{else}}{{{newValue}}}{{/if}}",
     },
 
     // Add labels according to package and update types
@@ -47,6 +55,22 @@
       "matchDatasources": ["helm"],
       "matchUpdateTypes": ["patch"],
       "labels": ["renovate/helm-release", "dependency/patch"]
-    }
+    },
+
+    {
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["major"],
+      "labels": ["renovate/docker-release", "dependency/major"]
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["minor"],
+      "labels": ["renovate/docker-release", "dependency/minor"]
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["patch"],
+      "labels": ["renovate/docker-release", "dependency/patch"]
+    },
   ]
 }
