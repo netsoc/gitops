@@ -17,6 +17,10 @@ spec:
   install:
     skipCRDs: true
   values:
+    image:
+      name: ghcr.io/netsoc/traefik
+      tag: 2.5.0-rc2-9115ec8a
+
     logs:
       general:
         level: INFO
