@@ -54,7 +54,8 @@ spec:
             - /network-node-manager
           args:
             - --metrics-addr=0
-          image: kakaocorp/network-node-manager:1.2.2
+          image: ghcr.io/devplayer0/network-node-manager:latest
+          imagePullPolicy: Always
           name: network-node-manager
           resources:
             limits:
