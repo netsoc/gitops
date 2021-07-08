@@ -7,3 +7,4 @@ resources:
 - website.yaml
 - docs.yaml
 - accounts
+- mail.yaml
