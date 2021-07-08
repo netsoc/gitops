@@ -1,0 +1,81 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: network-node-manager-role
+rules:
+  - apiGroups: ['']
+    resources: [services]
+    verbs: [get, list, watch]
+  - apiGroups: ['']
+    resources: [services/status]
+    verbs: [get, patch]
+  - apiGroups: ['']
+    resources: [nodes]
+    verbs: [get, list, watch]
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: network-node-manager
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: network-node-manager-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: network-node-manager-role
+subjects:
+  - kind: ServiceAccount
+    name: network-node-manager
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: network-node-manager
+  labels:
+    control-plane: network-node-manager
+spec:
+  selector:
+    matchLabels:
+      control-plane: network-node-manager
+  template:
+    metadata:
+      labels:
+        control-plane: network-node-manager
+    spec:
+      serviceAccountName: network-node-manager
+      priorityClassName: system-node-critical
+      hostNetwork: true
+      containers:
+        - command:
+            - /network-node-manager
+          args:
+            - --metrics-addr=0
+          image: kakaocorp/network-node-manager:1.2.2
+          name: network-node-manager
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          env:
+            - name: POD_CIDR_IPV4
+              value: 10.42.0.0/16
+            - name: RULE_EXTERNAL_CLUSTER_ENABLE
+              value: 'true'
+          securityContext:
+            capabilities:
+              add: [NET_ADMIN]
+          volumeMounts:
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+      volumes:
+        - name: xtables-lock
+          hostPath:
+            path: /run/xtables.lock
+            type: FileOrCreate
