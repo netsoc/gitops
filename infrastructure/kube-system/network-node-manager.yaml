@@ -50,7 +50,7 @@ spec:
       priorityClassName: system-node-critical
       hostNetwork: true
       containers:
-        - image: ghcr.io/devplayer0/network-node-manager:07f41168-1625788765Z
+        - image: kakaocorp/network-node-manager:1.2.3
           name: network-node-manager
           resources:
             limits:
