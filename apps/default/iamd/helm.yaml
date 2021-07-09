@@ -41,14 +41,14 @@ spec:
       postgresql:
         soft_delete: false
       mail:
-        from: '"Netsoc IAM (staging)" <iamd-staging@netsoc.ie>'
+        from: '"Netsoc IAM" <iam@netsoc.ie>'
         reply_to: '"Netsoc support" <support@netsoc.ie>'
         verify_url: 'https://accounts.staging.netsoc.ie/verify?token={{.Token}}'
         reset_url: 'https://accounts.staging.netsoc.ie/reset?token={{.Token}}'
       smtp:
-        host: mail.nul.ie
+        host: shoe.netsoc.tcd.ie
         port: 587
-        username: iamd-staging@netsoc.ie
+        username: iam@netsoc.tcd.ie
         tls: true
       jwt:
         issuer: netsoc
