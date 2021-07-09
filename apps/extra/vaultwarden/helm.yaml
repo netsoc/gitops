@@ -21,7 +21,7 @@ spec:
       DATABASE_URL: /data/db.sqlite3
 
       WEBSOCKET_ENABLED: 'false'
-      INVITATIONS_ALLOWED: 'false'
+      SIGNUPS_ALLOWED: 'false'
       DOMAIN: https://pass.netsoc.tcd.ie
 
       SMTP_HOST: shoe.netsoc.tcd.ie
