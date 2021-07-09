@@ -50,6 +50,7 @@ spec:
       smtp:
         host: shoe.netsoc.tcd.ie
         port: 587
+        connect_timeout: 15s
         username: iam@netsoc.tcd.ie
         tls: true
       jwt:
