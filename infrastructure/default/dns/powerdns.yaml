@@ -44,7 +44,8 @@ spec:
       type: LoadBalancer
       # Unfortunately we'll lose source IP with this, but Local is awkward and breaks internal access :(
       # https://github.com/kubernetes/kubernetes/pull/97081
-      externalTrafficPolicy: Cluster
+      # https://github.com/kakao/network-node-manager
+      externalTrafficPolicy: Local
       loadBalancerIP: '134.226.83.27'
       annotations:
         metallb.universe.tf/allow-shared-ip: dns
