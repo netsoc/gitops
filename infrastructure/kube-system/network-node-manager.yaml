@@ -50,12 +50,7 @@ spec:
       priorityClassName: system-node-critical
       hostNetwork: true
       containers:
-        - command:
-            - /network-node-manager
-          args:
-            - --metrics-addr=0
-          image: ghcr.io/devplayer0/network-node-manager:latest
-          imagePullPolicy: Always
+        - image: ghcr.io/devplayer0/network-node-manager:07f41168-1625788765Z
           name: network-node-manager
           resources:
             limits:
