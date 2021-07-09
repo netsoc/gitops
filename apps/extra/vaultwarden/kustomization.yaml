@@ -6,4 +6,4 @@ resources:
 secretGenerator:
 - name: vaultwarden
   files:
-  - env.yaml=secrets/env.yaml
+  - values.yaml=secrets/values.yaml
