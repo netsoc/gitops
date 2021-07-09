@@ -8,7 +8,7 @@ spec:
     spec:
       # renovate: registryUrl=https://netsoc.github.io/charts/
       chart: docs
-      version: 0.1.1
+      version: 0.2.0
       sourceRef:
         kind: HelmRepository
         name: netsoc
@@ -25,7 +25,9 @@ spec:
           secretName: tls-staging
       hosts:
         - host: docs.staging.netsoc.ie
-          paths: [/]
+          paths:
+            - path: /
+              pathType: Prefix
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
