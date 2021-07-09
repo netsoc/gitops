@@ -58,3 +58,4 @@ spec:
         allow-dnsupdate-from: ''
         resolver: '127.0.0.1'
         expand-alias: yes
+        outgoing-axfr-expand-alias: yes
