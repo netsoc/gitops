@@ -1,0 +1,57 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: vaultwarden
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: vaultwarden
+      version: 2.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  valuesFrom:
+    - kind: Secret
+      name: vaultwarden
+      valuesKey: env.yaml
+      targetPath: env
+  values:
+    env:
+      DATA_FOLDER: /data
+      DATABASE_URL: /data/db.sqlite3
+
+      WEBSOCKET_ENABLED: 'false'
+      INVITATIONS_ALLOWED: 'false'
+      DOMAIN: https://pass.netsoc.tcd.ie
+
+      SMTP_HOST: shoe.netsoc.tcd.ie
+      SMTP_FROM: pass@netsoc.tcd.ie
+      SMTP_PORT: '587'
+      SMTP_SSL: 'true'
+      SMTP_EXPLICIT_TLS: 'false'
+      SMTP_USERNAME: pass@netsoc.tcd.ie
+      SMTP_TIMEOUT: '15'
+
+    ingress:
+      main:
+        enabled: true
+        tls:
+          - hosts: [pass.netsoc.tcd.ie]
+            secretName: tls-tcd
+        hosts:
+          - host: pass.netsoc.tcd.ie
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  port: 80
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+
+    persistence:
+      data:
+        enabled: true
+        existingClaim: vaultwarden
