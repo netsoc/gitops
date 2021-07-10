@@ -16,6 +16,21 @@ spec:
         namespace: flux-system
   install:
     skipCRDs: true
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          # middlewaretcps isn't in the released yet
+          - target:
+              version: v1
+              kind: ClusterRole
+              name: traefik
+            patch:
+              - op: add
+                path: /rules/-
+                value:
+                  apiGroups: [traefik.containo.us]
+                  resources: [middlewaretcps]
+                  verbs: [get, list, watch]
   values:
     logs:
       general:
