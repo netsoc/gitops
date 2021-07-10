@@ -32,6 +32,10 @@ spec:
                   resources: [middlewaretcps]
                   verbs: [get, list, watch]
   values:
+    image:
+      name: ghcr.io/netsoc/traefik
+      tag: 2.5.0-rc2-9115ec8a
+
     logs:
       general:
         level: INFO
