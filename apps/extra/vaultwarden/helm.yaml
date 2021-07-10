@@ -21,7 +21,7 @@ spec:
       DATA_FOLDER: /data
       DATABASE_URL: /data/db.sqlite3
 
-      WEBSOCKET_ENABLED: 'false'
+      WEBSOCKET_ENABLED: 'true'
       SIGNUPS_ALLOWED: 'false'
       DOMAIN: https://pass.netsoc.tcd.ie
 
@@ -46,6 +46,12 @@ spec:
                 pathType: Prefix
                 service:
                   port: 80
+          - host: pass.netsoc.tcd.ie
+            paths:
+              - path: /notifications/hub
+                pathType: Prefix
+                service:
+                  port: 3012
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.tls: 'true'
