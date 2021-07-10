@@ -10,4 +10,5 @@ resources:
 - halkeye.yaml
 - ananace.yaml
 - zammad.yaml
+- devplayer0.yaml
 - netsoc.yaml
