@@ -59,4 +59,4 @@ spec:
         resolver: '127.0.0.1'
         expand-alias: yes
         outgoing-axfr-expand-alias: yes
-        gpgsql-extra-connection-parameters: keepalives=1
+        gpgsql-extra-connection-parameters: keepalives=1 keepalives_idle=60 keepalives_interval=10 keepalives_count=3
