@@ -1,0 +1,54 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: zammad
+spec:
+  volumeMode: Filesystem
+  accessModes: [ReadWriteOnce]
+  capacity:
+    storage: 32Gi
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    volumeHandle: zammad
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zammad
+spec:
+  volumeMode: Filesystem
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 32Gi
+  volumeName: zammad
+  storageClassName: longhorn
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: zammad-postgresql
+spec:
+  volumeMode: Filesystem
+  accessModes: [ReadWriteOnce]
+  capacity:
+    storage: 16Gi
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    volumeHandle: zammad-postgresql
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zammad-postgresql
+spec:
+  volumeMode: Filesystem
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 16Gi
+  volumeName: zammad-postgresql
+  storageClassName: longhorn

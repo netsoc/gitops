@@ -1,0 +1,53 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: zammad
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: zammad
+      version: 4.0.2
+      sourceRef:
+        kind: HelmRepository
+        name: zammad
+        namespace: flux-system
+  valuesFrom:
+    - kind: Secret
+      name: zammad-values
+  values:
+    envConfig:
+      elasticsearch:
+        host: ''
+        reindex: false
+
+    ingress:
+      enabled: true
+      tls:
+        - hosts: [support.staging.netsoc.ie]
+          secretName: tls-staging
+      hosts:
+        - host: support.staging.netsoc.ie
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                port: 80
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+
+    persistence:
+      enabled: true
+      existingClaim: zammad
+
+    elasticsearch:
+      enabled: false
+      enableInitialisation: false
+    postgresql:
+      enabled: true
+      persistence:
+        enabled: true
+        existingClaim: zammad-postgresql
+      volumePermissions:
+        enabled: true

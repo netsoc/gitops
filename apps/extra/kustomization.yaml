@@ -4,3 +4,4 @@ namespace: extra
 resources:
 - _namespace.yaml
 - vaultwarden
+- zammad
