@@ -7,10 +7,10 @@ spec:
   chart:
     spec:
       chart: zammad
-      version: 4.0.2
+      version: 4.0.3
       sourceRef:
         kind: HelmRepository
-        name: zammad
+        name: devplayer0
         namespace: flux-system
   valuesFrom:
     - kind: Secret
