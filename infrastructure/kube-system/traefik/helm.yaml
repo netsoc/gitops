@@ -18,6 +18,9 @@ spec:
     skipCRDs: true
   postRenderers:
     - kustomize:
+        images:
+          - name: ghcr.io/netsoc/traefik
+            newTag: 2.5.0-rc2-9115ec8a
         patchesJson6902:
           # middlewaretcps isn't in the released yet
           - target:
@@ -34,7 +37,9 @@ spec:
   values:
     image:
       name: ghcr.io/netsoc/traefik
-      tag: 2.5.0-rc2-9115ec8a
+      # The chart uses semverCompare which ignores "pre-releases" by default (a "+" can't be in a docker ref), so we
+      # patch the real version in with kustomize (see above)
+      tag: 2.5.0
 
     logs:
       general:
