@@ -5,5 +5,8 @@ resources:
 - flux-system
 - helm-repos
 - images
+- notifications
 - infrastructure.yaml
 - apps.yaml
+configurations:
+- namerefs.yaml

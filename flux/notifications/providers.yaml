@@ -1,0 +1,19 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  name: github
+spec:
+  type: github
+  address: https://github.com/netsoc/gitops-next
+  secretRef:
+    name: github-token
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  name: matrix
+spec:
+  type: slack
+  secretRef:
+    name: matrix-webhook
