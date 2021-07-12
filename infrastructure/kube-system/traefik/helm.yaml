@@ -20,7 +20,7 @@ spec:
     - kustomize:
         images:
           - name: ghcr.io/netsoc/traefik
-            newTag: 2.5.0-rc2-9115ec8a
+            newTag: 2.5.0-rc2-5be7f6a2
         patchesJson6902:
           # middlewaretcps isn't in the released yet
           - target:
