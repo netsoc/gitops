@@ -12,3 +12,5 @@ nameReference:
     path: spec/acme/privateKeySecretRef/name
   - kind: ClusterIssuer
     path: spec/acme/solvers/dns01/rfc2136/tsigSecretSecretRef/name
+  - kind: Provider
+    path: spec/secretRef/name

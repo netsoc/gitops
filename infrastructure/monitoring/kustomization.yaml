@@ -4,3 +4,4 @@ namespace: monitoring
 resources:
 - _namespace.yaml
 - dashboard.yaml
+- notifications

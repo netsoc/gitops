@@ -10,6 +10,7 @@ spec:
   eventSources:
     - kind: Kustomization
       name: '*'
+      namespace: flux-system
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta1
 kind: Alert
@@ -22,5 +23,7 @@ spec:
   eventSources:
     - kind: GitRepository
       name: '*'
+      namespace: flux-system
     - kind: Kustomization
       name: '*'
+      namespace: flux-system
