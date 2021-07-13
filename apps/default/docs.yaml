@@ -16,7 +16,7 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/docs
-      tag: 8e233bb1-1626185782Z # {"$imagepolicy": "flux-system:docs:tag"}
+      tag: 9b1835aa-1626216206Z # {"$imagepolicy": "flux-system:docs:tag"}
     replicaCount: 1
     ingress:
       enabled: true
