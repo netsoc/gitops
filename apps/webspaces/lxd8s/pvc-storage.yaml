@@ -4,7 +4,7 @@ kind: PersistentVolume
 metadata:
   name: storage-lxd8s-0
 spec:
-  volumeMode: Filesystem
+  volumeMode: Block
   accessModes: [ReadWriteOnce]
   capacity:
     storage: 2Ti
@@ -18,7 +18,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: storage-lxd8s-0
 spec:
-  volumeMode: Filesystem
+  volumeMode: Block
   accessModes: [ReadWriteOnce]
   resources:
     requests:
@@ -32,7 +32,7 @@ kind: PersistentVolume
 metadata:
   name: storage-lxd8s-1
 spec:
-  volumeMode: Filesystem
+  volumeMode: Block
   accessModes: [ReadWriteOnce]
   capacity:
     storage: 2Ti
@@ -46,7 +46,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: storage-lxd8s-1
 spec:
-  volumeMode: Filesystem
+  volumeMode: Block
   accessModes: [ReadWriteOnce]
   resources:
     requests:
@@ -60,7 +60,7 @@ kind: PersistentVolume
 metadata:
   name: storage-lxd8s-2
 spec:
-  volumeMode: Filesystem
+  volumeMode: Block
   accessModes: [ReadWriteOnce]
   capacity:
     storage: 2Ti
@@ -74,7 +74,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: storage-lxd8s-2
 spec:
-  volumeMode: Filesystem
+  volumeMode: Block
   accessModes: [ReadWriteOnce]
   resources:
     requests:
