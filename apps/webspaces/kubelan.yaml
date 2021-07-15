@@ -1,0 +1,6 @@
+log_level: DEBUG
+services:
+  - kube-system/traefik
+vxlan:
+  interface: lxd-overlay
+  vni: 7331

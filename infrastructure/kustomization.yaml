@@ -7,6 +7,7 @@ resources:
 - kube-system
 - default
 - monitoring
+- webspaces.yaml
 secretGenerator:
 - namespace: kube-system
   name: tls-tcd
@@ -33,6 +34,14 @@ secretGenerator:
   options:
     disableNameSuffixHash: true
 - namespace: monitoring
+  name: tls-tcd
+  type: kubernetes.io/tls
+  files:
+  - tls.crt=common/netsoc.tcd.ie.crt
+  - tls.key=common/netsoc.tcd.ie.key
+  options:
+    disableNameSuffixHash: true
+- namespace: webspaces
   name: tls-tcd
   type: kubernetes.io/tls
   files:

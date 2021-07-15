@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: dnsmasq
+spec:
+  volumeMode: Filesystem
+  accessModes: [ReadWriteOnce]
+  capacity:
+    storage: 64Mi
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    volumeHandle: dnsmasq
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dnsmasq
+spec:
+  volumeMode: Filesystem
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 64Mi
+  volumeName: dnsmasq
+  storageClassName: longhorn
