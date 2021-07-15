@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: webspaces
 resources:
 - dnsmasq
+- lxd8s
 configMapGenerator:
 - name: kubelan
   files: [kubelan.yaml]

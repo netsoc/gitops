@@ -1,0 +1,73 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: lxd8s
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: lxd8s
+      version: 0.4.1
+      sourceRef:
+        kind: HelmRepository
+        name: devplayer0
+        namespace: flux-system
+  valuesFrom:
+    - kind: Secret
+      name: lxd8s-extras
+      valuesKey: trustPassword
+      targetPath: trustPassword
+  values:
+    replicaCount: 3
+    onePerNode: true
+
+    ingressRoute:
+      enabled: true
+      hosts: [lxd.netsoc.tcd.ie]
+
+    clusterCertSecret: tls-tcd
+
+    resources:
+      limits:
+        smarter-devices/kvm: 1
+        cpu: null
+        memory: null
+      requests:
+        smarter-devices/kvm: 1
+        cpu: null
+        memory: null
+    vm:
+      cpus: 95%
+      memory: 80%
+    firectlTimeout: 30000
+
+    storageClass: longhorn
+    pvc:
+      lxd:
+        size: 64Gi
+      storage:
+        size: 2Ti
+
+    global:
+      kubelan:
+        externalConfigMap: kubelan
+
+    nat:
+      host: 192.168.69.1/30
+      vm: 192.168.69.2/30
+    network: '172.24.0.0/16'
+
+    oomInterval: 5s
+    oomMinFree: '512'
+
+    preseed:
+      profiles:
+        - name: default
+          config:
+            boot.autostart: 'false'
+            limits.cpu: '4'
+            limits.memory: '4096MiB'
+            security.nesting: 'true'
+          devices:
+            root:
+              size: 32GiB
