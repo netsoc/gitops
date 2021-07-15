@@ -23,7 +23,10 @@ spec:
 
     ingressRoute:
       enabled: true
-      hosts: [lxd.netsoc.tcd.ie]
+      hosts:
+        - lxd.netsoc.tcd.ie
+        # LXD uses port 8443 by default and puts the port in the SNI
+        - lxd.netsoc.tcd.ie:443
 
     clusterCertSecret: tls-tcd
 
