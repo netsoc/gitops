@@ -24,7 +24,7 @@ spec:
     ingressRoute:
       enabled: true
       entryPoints: [lxd]
-      hosts: [lxd.netsoc.tcd.ie]
+      hosts: ['*']
 
     clusterCertSecret: tls-tcd
 
