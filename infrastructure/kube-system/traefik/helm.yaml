@@ -44,15 +44,17 @@ spec:
     ports:
       web:
         protocol: TCP
-        port: 8080
+        port: 80
         expose: true
-        exposedPort: 80
         redirectTo: websecure
       websecure:
         protocol: TCP
+        port: 443
+        expose: true
+      lxd:
+        protocol: TCP
         port: 8443
         expose: true
-        exposedPort: 443
     tlsOptions:
       default:
         minVersion: VersionTLS12
@@ -75,6 +77,14 @@ spec:
       dashboard:
         # We want to offer the dashboard on a custom host with auth
         enabled: false
+
+    securityContext:
+      capabilities:
+        add: [NET_BIND_SERVICE]
+        drop: [ALL]
+      runAsNonRoot: false
+      runAsUser: 0
+      runAsGroup: 0
     deployment:
       replicas: 1
 ---
