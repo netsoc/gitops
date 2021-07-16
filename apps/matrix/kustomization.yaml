@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: matrix
 resources:
 - _namespace.yaml
+- tls-staging.yaml
 - synapse
 - ma1sd
 - element-web

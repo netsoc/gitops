@@ -189,5 +189,5 @@ spec:
             servicePort: 8090
 
       tls:
-        - secretName: tls-main
+        - secretName: tls-staging
           hosts: [matrix.staging.netsoc.ie]

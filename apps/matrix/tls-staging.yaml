@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: tls-staging
+spec:
+  dnsNames:
+    - 'staging.netsoc.ie'
+    - '*.staging.netsoc.ie'
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  secretName: tls-staging

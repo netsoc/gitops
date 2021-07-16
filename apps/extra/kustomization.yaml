@@ -3,5 +3,6 @@ kind: Kustomization
 namespace: extra
 resources:
 - _namespace.yaml
+- tls-staging.yaml
 - vaultwarden
 - zammad
