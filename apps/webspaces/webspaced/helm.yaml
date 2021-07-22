@@ -16,7 +16,6 @@ spec:
     - kind: Secret
       name: webspaced-extras
       valuesKey: values.yaml
-      targetPath: secrets
     - kind: Secret
       name: webspaced-extras
       valuesKey: client.key
