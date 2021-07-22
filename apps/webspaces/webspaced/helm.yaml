@@ -17,6 +17,10 @@ spec:
       name: webspaced-extras
       valuesKey: values.yaml
     - kind: Secret
+      name: tls-tcd
+      valuesKey: tls.crt
+      targetPath: config.lxd.tls.server_cert
+    - kind: Secret
       name: webspaced-extras
       valuesKey: client.key
       targetPath: secrets.lxdKey
