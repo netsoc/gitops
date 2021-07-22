@@ -33,6 +33,7 @@ spec:
         level: INFO
       access:
         enabled: true
+    metrics: null
     providers:
       kubernetesCRD:
         enabled: true
@@ -95,17 +96,17 @@ metadata:
 spec:
   entryPoints: [websecure]
   routes:
-  - match: Host(`traefik.netsoc.tcd.ie`)
-    kind: Rule
-    services:
-    - name: api@internal
-      kind: TraefikService
-    middlewares:
-    - name: auth
+    - match: Host(`traefik.netsoc.tcd.ie`)
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+      middlewares:
+        - name: auth
   tls:
     secretName: tls-tcd
     domains:
-    - main: '*.netsoc.tcd.ie'
+      - main: '*.netsoc.tcd.ie'
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
