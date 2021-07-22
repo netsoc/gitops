@@ -4,6 +4,7 @@ namespace: webspaces
 resources:
 - dnsmasq
 - lxd8s
+- webspaced
 configMapGenerator:
 - name: kubelan
   files: [kubelan.yaml]

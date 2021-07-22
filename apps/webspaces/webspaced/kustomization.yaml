@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- helm.yaml
+secretGenerator:
+- name: webspaced-extras
+  files:
+  - client.key=secrets/client.key
+  - values.yaml=secrets/values.yaml

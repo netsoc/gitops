@@ -2,6 +2,7 @@ log_level: DEBUG
 services:
   - dnsmasq
   - lxd8s
+  - webspaced
   - kube-system/traefik
 vxlan:
   interface: lxd-overlay

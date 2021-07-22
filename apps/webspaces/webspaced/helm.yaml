@@ -1,0 +1,116 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: webspaced
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: webspaced
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: netsoc
+        namespace: flux-system
+  valuesFrom:
+    - kind: Secret
+      name: webspaced-extras
+      valuesKey: values.yaml
+      targetPath: secrets
+    - kind: Secret
+      name: webspaced-extras
+      valuesKey: client.key
+      targetPath: secrets.lxdKey
+  values:
+    global:
+      kubelan:
+        externalConfigMap: kubelan
+        vxlan:
+          interface: lxd-overlay
+
+    fwdService:
+      enabled: true
+      type: LoadBalancer
+      dummyPort: 6969
+      spec:
+        loadBalancerIP: '134.226.83.101'
+        externalTrafficPolicy: Local
+
+    ingress:
+      enabled: true
+      tls:
+      - hosts: [webspaced.staging.netsoc.ie]
+        secretName: tls-staging
+      hosts:
+      - host: webspaced.staging.netsoc.ie
+        paths:
+          - path: /
+            pathType: Prefix
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+
+    staticIP: '172.24.254.2/16'
+
+    config:
+      log_level: DEBUG
+      iam:
+        url: 'http://iamd.default/v1'
+      webspaces:
+        lxd_profile: default
+        instance_prefix: 'ws-'
+        domain: staging.netsoc.ie
+        config_defaults:
+          startup_delay: 5
+          http_port: 80
+          sni_passthrough: false
+        max_startup_delay: 60
+        ip_timeout: '20s'
+        ports:
+          start: 49152
+          end: 65535
+          max: 64
+      traefik:
+        kubernetes:
+          default_secret: tls-staging
+          cluster_issuer: letsencrypt-staging
+        https_entrypoint: websecure
+        default_sans:
+        - 'staging.netsoc.ie'
+        - '*.staging.netsoc.ie'
+      lxd:
+        url: 'https://lxd8s'
+        tls:
+          client_cert: |
+            -----BEGIN CERTIFICATE-----
+            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
+            4Yb8kdU/lM3eIRWhLlyFCKRwxtmqTb85SM/UUe4=
+            -----END CERTIFICATE-----
