@@ -1,4 +1,28 @@
 ---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: traefik-kubelan
+  namespace: kube-system
+rules:
+  - apiGroups: ['discovery.k8s.io']
+    resources: ['endpointslices']
+    verbs: ['watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: traefik-kubelan
+  namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: traefik-kubelan
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: traefik
+    namespace: kube-system
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
