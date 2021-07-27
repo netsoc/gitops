@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: shhd
-      version: 0.1.5
+      version: 0.1.6
       sourceRef:
         kind: HelmRepository
         name: netsoc
@@ -33,6 +33,10 @@ spec:
       iam:
         url: 'http://iamd.default/v1'
       jail:
+        cli_extra:
+          urls:
+            iam: https://iam.staging.netsoc.ie/v1
+            webspaced: https://webspaced.staging.netsoc.ie/v1
         greeting: |
           Welcome to Netsoc SHH (not a typo :P).
           The latest version of the CLI is pre-installed (type netsoc).
