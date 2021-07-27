@@ -5,6 +5,7 @@ resources:
 - dnsmasq
 - lxd8s
 - webspaced
+- octolxd.yaml
 configMapGenerator:
 - name: kubelan
   files: [kubelan.yaml]
