@@ -6,6 +6,7 @@ spec:
   interval: 1m
   chart:
     spec:
+      # renovate: registryUrl=https://devplayer0.github.io/charts/
       chart: dnsmasq
       version: 0.1.5
       sourceRef:
