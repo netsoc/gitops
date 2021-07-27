@@ -6,6 +6,7 @@ spec:
   interval: 1m
   chart:
     spec:
+      # renovate: registryUrl=https://devplayer0.github.io/charts/
       chart: lxd8s
       version: 0.4.4
       sourceRef:
