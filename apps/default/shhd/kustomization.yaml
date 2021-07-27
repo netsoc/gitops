@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- helm.yaml
+secretGenerator:
+- name: shhd-extras
+  files:
+  - iamToken=secrets/iam_token.bin
+  - sshHostKey=secrets/host.key

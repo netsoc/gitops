@@ -1,0 +1,40 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: shhd
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: shhd
+      version: 0.1.5
+      sourceRef:
+        kind: HelmRepository
+        name: netsoc
+        namespace: flux-system
+  valuesFrom:
+    - kind: Secret
+      name: shhd-extras
+      valuesKey: iamToken
+      targetPath: secrets.iamToken
+    - kind: Secret
+      name: shhd-extras
+      valuesKey: sshHostKey
+      targetPath: secrets.sshHostKey
+  values:
+    service:
+      type: LoadBalancer
+      port: 22
+      spec:
+        loadBalancerIP: '134.226.83.102'
+        externalTrafficPolicy: Local
+
+    config:
+      iam:
+        url: 'http://iamd.default/v1'
+      jail:
+        greeting: |
+          Welcome to Netsoc SHH (not a typo :P).
+          The latest version of the CLI is pre-installed (type netsoc).
+
+          For more information, see https://docs.netsoc.ie/shh/.
