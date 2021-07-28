@@ -53,7 +53,7 @@ spec:
             name: powerdns-tsig
             key: cert-manager.key
       selector:
-        dnsZones: ['staging.netsoc.ie']
+        dnsZones: ['netsoc.ie']
     - http01:
         ingress:
           serviceType: ClusterIP

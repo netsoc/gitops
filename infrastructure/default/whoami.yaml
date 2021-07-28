@@ -19,8 +19,8 @@ spec:
     ingress:
       enabled: true
       tls:
-        - hosts: [docs.staging.netsoc.ie]
-          secretName: tls-staging
+        - hosts: [whoami.netsoc.tcd.ie]
+          secretName: tls-tcd
       hosts: [whoami.netsoc.tcd.ie]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
