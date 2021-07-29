@@ -12,24 +12,24 @@ spec:
       name: letsencrypt-account-keys
       key: tls-staging.key
     solvers:
-    - dns01:
-        rfc2136:
-          nameserver: powerdns-udp.default
-          tsigKeyName: 'cert-manager.'
-          tsigAlgorithm: HMACSHA512
-          tsigSecretSecretRef:
-            name: powerdns-tsig
-            key: cert-manager.key
-      selector:
-        dnsZones: ['staging.netsoc.ie']
-    - http01:
-        ingress:
-          serviceType: ClusterIP
-          ingressTemplate:
-            metadata:
-              annotations:
-                traefik.ingress.kubernetes.io/router.entrypoints: websecure
-                traefik.ingress.kubernetes.io/router.tls: 'true'
+      - dns01:
+          rfc2136:
+            nameserver: powerdns-udp.default
+            tsigKeyName: 'cert-manager.'
+            tsigAlgorithm: HMACSHA512
+            tsigSecretSecretRef:
+              name: powerdns-tsig
+              key: cert-manager.key
+        selector:
+          dnsZones: ['netsoc.ie']
+      - http01:
+          ingress:
+            serviceType: ClusterIP
+            ingressTemplate:
+              metadata:
+                annotations:
+                  traefik.ingress.kubernetes.io/router.entrypoints: websecure
+                  traefik.ingress.kubernetes.io/router.tls: 'true'
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -44,21 +44,29 @@ spec:
       name: letsencrypt-account-keys
       key: tls.key
     solvers:
-    - dns01:
-        rfc2136:
-          nameserver: powerdns-udp.default
-          tsigKeyName: 'cert-manager.'
-          tsigAlgorithm: HMACSHA512
-          tsigSecretSecretRef:
-            name: powerdns-tsig
-            key: cert-manager.key
-      selector:
-        dnsZones: ['netsoc.ie']
-    - http01:
-        ingress:
-          serviceType: ClusterIP
-          ingressTemplate:
-            metadata:
-              annotations:
-                traefik.ingress.kubernetes.io/router.entrypoints: websecure
-                traefik.ingress.kubernetes.io/router.tls: 'true'
+      #- dns01:
+      #    rfc2136:
+      #      nameserver: powerdns-udp.default
+      #      tsigKeyName: 'cert-manager.'
+      #      tsigAlgorithm: HMACSHA512
+      #      tsigSecretSecretRef:
+      #        name: powerdns-tsig
+      #        key: cert-manager.key
+      #  selector:
+      #    dnsZones: ['netsoc.ie']
+      - dns01:
+          cloudflare:
+            email: jackos1998@gmail.com
+            apiTokenSecretRef:
+              name: cloudflare-api
+              key: api-token
+        selector:
+          dnsZones: ['netsoc.ie']
+      - http01:
+          ingress:
+            serviceType: ClusterIP
+            ingressTemplate:
+              metadata:
+                annotations:
+                  traefik.ingress.kubernetes.io/router.entrypoints: websecure
+                  traefik.ingress.kubernetes.io/router.tls: 'true'

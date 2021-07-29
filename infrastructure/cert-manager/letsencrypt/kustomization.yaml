@@ -10,3 +10,6 @@ secretGenerator:
 - name: powerdns-tsig
   files:
   - cert-manager.key=secrets/pdns-cert-manager.bin
+- name: cloudflare-api
+  files:
+  - api-token=secrets/cloudflare-api-token.bin
