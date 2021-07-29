@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kubewall
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kubewall
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kubewall
+    spec:
+      hostNetwork: true
+      containers:
+        - name: kubewall
+          image: ghcr.io/devplayer0/kubewall:0.1.0
+          imagePullPolicy: IfNotPresent
+          args: [/run/nftables/rules.nft]
+          securityContext:
+            capabilities:
+              add: [NET_ADMIN]
+          volumeMounts:
+            - name: rules
+              mountPath: /run/nftables
+      volumes:
+        - name: rules
+          configMap:
+            name: kubewall
