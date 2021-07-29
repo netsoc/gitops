@@ -19,7 +19,7 @@ spec:
       valuesKey: trustPassword
       targetPath: trustPassword
   values:
-    replicaCount: 0
+    replicaCount: 2
     onePerNode: true
 
     ingressRoute:
