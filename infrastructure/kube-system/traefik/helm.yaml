@@ -74,6 +74,8 @@ spec:
         protocol: TCP
         port: 443
         expose: true
+      # Can't seem to set `null` in nested maps?
+      metrics: null
       lxd:
         protocol: TCP
         port: 8443
@@ -109,7 +111,7 @@ spec:
       runAsUser: 0
       runAsGroup: 0
     deployment:
-      replicas: 1
+      replicas: 3
       additionalContainers:
         - name: kubelan
           image: 'ghcr.io/devplayer0/kubelan:0.2.3'
