@@ -3,7 +3,6 @@ kind: HelmRelease
 metadata:
   name: synapse
 spec:
-  suspend: true
   interval: 1m
   chart:
     spec:

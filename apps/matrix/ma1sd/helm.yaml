@@ -3,7 +3,6 @@ kind: HelmRelease
 metadata:
   name: ma1sd
 spec:
-  suspend: true
   interval: 1m
   chart:
     spec:
@@ -20,7 +19,7 @@ spec:
       existingClaim: ma1sd
     config:
       matrix:
-        domain: 'staging.netsoc.ie'
+        domain: 'netsoc.ie'
       server:
         publicUrl: 'https://matrix.netsoc.ie'
 
