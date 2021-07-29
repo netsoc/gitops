@@ -34,6 +34,8 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
 
+    env:
+      KUBERNETES_POD_NAMESPACE: default
     config:
       issuer: https://dex.netsoc.ie
 
@@ -41,9 +43,6 @@ spec:
         type: kubernetes
         config:
           inCluster: true
-
-      web:
-        http: :5556
 
       frontend:
         issuer: Netsoc
