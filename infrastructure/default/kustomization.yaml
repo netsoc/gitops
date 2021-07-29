@@ -4,3 +4,4 @@ namespace: default
 resources:
 - dns
 - whoami.yaml
+- mail.yaml
