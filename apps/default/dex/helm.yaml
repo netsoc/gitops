@@ -1,0 +1,50 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: dex
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: dex
+      version: 0.5.0
+      sourceRef:
+        kind: HelmRepository
+        name: dex
+        namespace: flux-system
+  valuesFrom:
+    - kind: Secret
+      name: dex-extras
+  values:
+    image:
+      repository: ghcr.io/netsoc/dex
+      tag: 2.29.0-2997c0b8-netsoc
+
+    ingress:
+      enabled: true
+      tls:
+        - hosts: [dex.netsoc.ie]
+          secretName: tls-main
+      hosts:
+        - host: dex.netsoc.ie
+          paths:
+            - path: /
+              pathType: Prefix
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+
+    config:
+      issuer: https://dex.netsoc.ie
+
+      storage:
+        type: kubernetes
+        config:
+          inCluster: true
+
+      web:
+        http: :5556
+
+      frontend:
+        issuer: Netsoc
+        logoURL: https://www.netsoc.ie/assets/images/netsoc-logo.svg
