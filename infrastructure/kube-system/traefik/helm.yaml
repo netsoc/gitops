@@ -55,8 +55,6 @@ spec:
         level: INFO
       access:
         enabled: true
-        filters:
-          statuscodes: '200,300-302,401,403'
     metrics: null
     providers:
       kubernetesCRD:
