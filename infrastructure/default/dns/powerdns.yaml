@@ -27,8 +27,10 @@ spec:
       name: dns-secrets
       valuesKey: powerdns-values.yaml
   values:
+    replicaCount: 3
     env:
       TZ: Europe/Dublin
+
     postgresql:
       enabled: true
       persistence:
@@ -40,6 +42,7 @@ spec:
         powerdns-admin.sql: |
           CREATE DATABASE powerdnsadmin;
           GRANT ALL PRIVILEGES ON DATABASE powerdnsadmin to pdns;
+
     service:
       type: LoadBalancer
       # Unfortunately we'll lose source IP with this, but Local is awkward and breaks internal access :(
@@ -49,6 +52,7 @@ spec:
       loadBalancerIP: '134.226.83.27'
       annotations:
         metallb.universe.tf/allow-shared-ip: dns
+
     powerdns:
       domain: netsoc.tcd.ie
       config:
