@@ -27,6 +27,16 @@ spec:
       entryPoints: [lxd]
       hosts: ['*']
 
+    startupProbe:
+      initialDelaySeconds: 5
+      timeoutSeconds: 5
+      periodSeconds: 3
+      failureThreshold: 100
+    livenessProbe:
+      timeoutSeconds: 30
+      periodSeconds: 10
+      failureThreshold: 20
+
     clusterCertSecret: tls-tcd
 
     resources:
