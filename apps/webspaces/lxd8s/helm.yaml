@@ -3,6 +3,7 @@ kind: HelmRelease
 metadata:
   name: lxd8s
 spec:
+  suspend: true
   interval: 1m
   chart:
     spec:
@@ -19,7 +20,7 @@ spec:
       valuesKey: trustPassword
       targetPath: trustPassword
   values:
-    replicaCount: 3
+    replicaCount: 4
     onePerNode: true
 
     ingressRoute:
@@ -39,8 +40,8 @@ spec:
         cpu: null
         memory: null
     vm:
-      cpus: 95%
-      memory: 80%
+      cpus: 90%
+      memory: 75%
     firectlTimeout: 30000
 
     storageClass: longhorn

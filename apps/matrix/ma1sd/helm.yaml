@@ -3,6 +3,7 @@ kind: HelmRelease
 metadata:
   name: ma1sd
 spec:
+  suspend: true
   interval: 1m
   chart:
     spec:
@@ -21,15 +22,15 @@ spec:
       matrix:
         domain: 'staging.netsoc.ie'
       server:
-        publicUrl: 'https://matrix.staging.netsoc.ie'
+        publicUrl: 'https://matrix.netsoc.ie'
 
       dns:
         overwrite:
           homeserver:
             client:
-              - name: 'matrix.staging.netsoc.ie'
+              - name: 'matrix.netsoc.ie'
                 value: 'http://synapse-matrix-synapse:8008'
-              - name: 'staging.netsoc.ie'
+              - name: 'netsoc.ie'
                 value: 'http://synapse-matrix-synapse:8008'
 
       rest:

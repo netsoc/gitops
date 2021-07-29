@@ -17,10 +17,10 @@ spec:
     ingress:
       enabled: true
       tls:
-        - hosts: [octolxd.staging.netsoc.ie]
+        - hosts: [octolxd.netsoc.ie]
           secretName: tls-main
       hosts:
-        - host: octolxd.staging.netsoc.ie
+        - host: octolxd.netsoc.ie
           paths:
             - path: /
               pathType: Prefix

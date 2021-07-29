@@ -21,10 +21,10 @@ spec:
     ingress:
       enabled: true
       tls:
-        - hosts: [iam.staging.netsoc.ie]
-          secretName: tls-staging
+        - hosts: [iam.netsoc.ie]
+          secretName: tls-main
       hosts:
-        - host: iam.staging.netsoc.ie
+        - host: iam.netsoc.ie
           paths:
             - path: /
               pathType: Prefix
@@ -45,8 +45,8 @@ spec:
       mail:
         from: '"Netsoc IAM" <iam@netsoc.ie>'
         reply_to: '"Netsoc support" <support@netsoc.ie>'
-        verify_url: 'https://accounts.staging.netsoc.ie/verify?token={{.Token}}'
-        reset_url: 'https://accounts.staging.netsoc.ie/reset?token={{.Token}}'
+        verify_url: 'https://accounts.netsoc.ie/verify?token={{.Token}}'
+        reset_url: 'https://accounts.netsoc.ie/reset?token={{.Token}}'
       smtp:
         host: shoe.netsoc.tcd.ie
         port: 587
@@ -61,4 +61,4 @@ spec:
         max_age: 72h
       ma1sd:
         http_address: ':8008'
-        domain: staging.netsoc.ie
+        domain: netsoc.ie

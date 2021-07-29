@@ -3,6 +3,7 @@ kind: HelmRelease
 metadata:
   name: webspaced
 spec:
+  suspend: true
   interval: 1m
   chart:
     spec:
@@ -43,10 +44,10 @@ spec:
     ingress:
       enabled: true
       tls:
-      - hosts: [webspaced.staging.netsoc.ie]
-        secretName: tls-staging
+      - hosts: [webspaced.netsoc.ie]
+        secretName: tls-main
       hosts:
-      - host: webspaced.staging.netsoc.ie
+      - host: webspaced.netsoc.ie
         paths:
           - path: /
             pathType: Prefix
@@ -63,7 +64,7 @@ spec:
       webspaces:
         lxd_profile: default
         instance_prefix: 'ws-'
-        domain: staging.netsoc.ie
+        domain: netsoc.ie
         config_defaults:
           startup_delay: 5
           http_port: 80
@@ -76,12 +77,12 @@ spec:
           max: 64
       traefik:
         kubernetes:
-          default_secret: tls-staging
-          cluster_issuer: letsencrypt-staging
+          default_secret: tls-main
+          cluster_issuer: letsencrypt
         https_entrypoint: websecure
         default_sans:
-        - 'staging.netsoc.ie'
-        - '*.staging.netsoc.ie'
+        - 'netsoc.ie'
+        - '*.netsoc.ie'
       lxd:
         url: 'https://lxd8s'
         tls:

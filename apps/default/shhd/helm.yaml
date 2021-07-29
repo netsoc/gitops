@@ -34,10 +34,6 @@ spec:
       iam:
         url: 'http://iamd.default/v1'
       jail:
-        cli_extra:
-          urls:
-            iam: https://iam.staging.netsoc.ie/v1
-            webspaced: https://webspaced.staging.netsoc.ie/v1
         greeting: |
           Welcome to Netsoc SHH (not a typo :P).
           The latest version of the CLI is pre-installed (type netsoc).

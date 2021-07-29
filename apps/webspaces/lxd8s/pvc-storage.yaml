@@ -81,3 +81,31 @@ spec:
       storage: 2Ti
   volumeName: storage-lxd8s-2
   storageClassName: longhorn
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: storage-lxd8s-3
+spec:
+  volumeMode: Block
+  accessModes: [ReadWriteOnce]
+  capacity:
+    storage: 2Ti
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    volumeHandle: storage-lxd8s-3
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: storage-lxd8s-3
+spec:
+  volumeMode: Block
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 2Ti
+  volumeName: storage-lxd8s-3
+  storageClassName: longhorn

@@ -20,21 +20,21 @@ spec:
     ingress:
       enabled: true
       tls:
-      - hosts: [accounts.staging.netsoc.ie]
-        secretName: tls-staging
-      hosts: [accounts.staging.netsoc.ie]
+      - hosts: [accounts.netsoc.ie]
+        secretName: tls-main
+      hosts: [accounts.netsoc.ie]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
 
     frontend:
       config:
-        IAM_BASE_URL: 'https://iam.staging.netsoc.ie/v1'
-        PAYMENT_BASE_URL: https://accounts.staging.netsoc.ie/api
+        IAM_BASE_URL: 'https://iam.netsoc.ie/v1'
+        PAYMENT_BASE_URL: https://accounts.netsoc.ie/api
         STRIPE_PUBLIC_KEY: 'pk_test_514gI43BPJxpSdBx8esUHmCoU4mRICB29h5HewGIMpiARXL8IFcDMNpqM7ztJqPOotPvKkobkwIC0fSymYNbL9KGn000DMtyT58'
-        MAIN_WEBSITE_URL: 'https://www.staging.netsoc.ie/services/'
+        MAIN_WEBSITE_URL: 'https://www.netsoc.ie/services/'
 
     backend:
       config:
-        ACCOUNTS_BASE_URL: https://accounts.staging.netsoc.ie
+        ACCOUNTS_BASE_URL: https://accounts.netsoc.ie
         IAM_BASE_URL: http://iamd/v1

@@ -21,10 +21,10 @@ spec:
     ingress:
       enabled: true
       tls:
-        - hosts: [docs.staging.netsoc.ie]
-          secretName: tls-staging
+        - hosts: [docs.netsoc.ie]
+          secretName: tls-main
       hosts:
-        - host: docs.staging.netsoc.ie
+        - host: docs.netsoc.ie
           paths:
             - path: /
               pathType: Prefix

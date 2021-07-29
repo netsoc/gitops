@@ -3,6 +3,7 @@ kind: HelmRelease
 metadata:
   name: zammad
 spec:
+  suspend: true
   interval: 1m
   chart:
     spec:
@@ -25,10 +26,10 @@ spec:
     ingress:
       enabled: true
       tls:
-        - hosts: [support.staging.netsoc.ie]
-          secretName: tls-staging
+        - hosts: [support.netsoc.ie]
+          secretName: tls-main
       hosts:
-        - host: support.staging.netsoc.ie
+        - host: support.netsoc.ie
           paths:
             - path: /
               pathType: Prefix

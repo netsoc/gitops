@@ -7,7 +7,7 @@ spec:
   volumeMode: Filesystem
   accessModes: [ReadWriteOnce]
   capacity:
-    storage: 128Mi
+    storage: 1Gi
   storageClassName: longhorn
   csi:
     driver: driver.longhorn.io
@@ -22,6 +22,6 @@ spec:
   accessModes: [ReadWriteOnce]
   resources:
     requests:
-      storage: 128Mi
+      storage: 1Gi
   volumeName: ma1sd
   storageClassName: longhorn

@@ -3,6 +3,7 @@ kind: HelmRelease
 metadata:
   name: synapse
 spec:
+  suspend: true
   interval: 1m
   chart:
     spec:
@@ -23,8 +24,8 @@ spec:
       existingSecret: synapse-extras
       existingSecretKey: signing.key
 
-    serverName: staging.netsoc.ie
-    publicServerName: matrix.staging.netsoc.ie
+    serverName: netsoc.ie
+    publicServerName: matrix.netsoc.ie
 
     config:
       logLevel: INFO
@@ -58,7 +59,7 @@ spec:
         - 'fec0::/10'
 
       allow_guest_access: false
-      trusted_third_party_id_servers: [matrix.staging.netsoc.ie]
+      trusted_third_party_id_servers: [matrix.netsoc.ie]
       password_providers:
         - module: rest_auth_provider.RestAuthProvider
           config:
@@ -166,8 +167,8 @@ spec:
       includeServerName: true
       includeUnderscoreSynapse: true
 
-      hosts: [matrix.staging.netsoc.ie]
-      csHosts: [matrix.staging.netsoc.ie]
+      hosts: [matrix.netsoc.ie]
+      csHosts: [matrix.netsoc.ie]
 
       paths:
         - path: /_matrix/identity
@@ -189,5 +190,5 @@ spec:
             servicePort: 8090
 
       tls:
-        - secretName: tls-staging
-          hosts: [matrix.staging.netsoc.ie]
+        - secretName: tls-main
+          hosts: [matrix.netsoc.ie]

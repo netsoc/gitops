@@ -23,9 +23,9 @@ spec:
         mountPath: /app/overlay
 
     defaultServer:
-      url: https://matrix.staging.netsoc.ie
-      name: staging.netsoc.ie
-      identity_server: https://matrix.staging.netsoc.ie
+      url: https://matrix.netsoc.ie
+      name: netsoc.ie
+      identity_server: https://matrix.netsoc.ie
 
     config:
       disable_custom_urls: true
@@ -38,7 +38,7 @@ spec:
         authHeaderLogoUrl: 'https://www.netsoc.ie/assets/images/matrix/logo.png'
         authFooterLinks:
           - text: Manage my Netsoc account
-            url: https://accounts.staging.netsoc.ie/
+            url: https://accounts.netsoc.ie/
 
       embeddedPages:
         welcomeUrl: '/overlay/welcome.html'
@@ -52,7 +52,7 @@ spec:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
-      hosts: [matrix.staging.netsoc.ie]
+      hosts: [matrix.netsoc.ie]
       tls:
-        - secretName: tls-staging
-          hosts: [matrix.staging.netsoc.ie]
+        - secretName: tls-main
+          hosts: [matrix.netsoc.ie]
