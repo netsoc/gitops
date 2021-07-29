@@ -3,7 +3,6 @@ kind: HelmRelease
 metadata:
   name: webspaced
 spec:
-  suspend: true
   interval: 1m
   chart:
     spec:
