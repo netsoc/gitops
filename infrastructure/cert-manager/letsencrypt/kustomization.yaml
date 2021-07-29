@@ -9,4 +9,4 @@ secretGenerator:
   - tls.key=secrets/account.key
 - name: powerdns-tsig
   files:
-  - cert-manager.key=secrets/pdns-cert-manager.key
+  - cert-manager.key=secrets/pdns-cert-manager.bin
