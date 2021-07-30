@@ -65,8 +65,8 @@ spec:
           OPENID_CONNECT_SCOPES: email groups profile offline_access
           ENABLE_AUTO_REGISTRATION: true
         service:
-          DISABLE_REGISTRATION: true
           ENABLE_NOTIFY_MAIL: true
+          ALLOW_ONLY_EXTERNAL_REGISTRATION: true
         mailer:
           ENABLED: true
           HOST: shoe.netsoc.tcd.ie:587
