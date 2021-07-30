@@ -5,6 +5,7 @@ define lb_dns = 134.226.83.27
 define lb_http = 134.226.83.100
 define lb_ws_forward = 134.226.83.101
 define lb_shh = 134.226.83.102
+define lb_git = 134.226.83.103
 
 table inet filter {
   chain wan-tcp {
@@ -12,6 +13,7 @@ table inet filter {
     ip daddr $lb_http tcp dport { http, https, 8443 } accept
     ip daddr $lb_ws_forward tcp dport 49152-65535 accept
     ip daddr $lb_shh tcp dport ssh accept
+    ip daddr $lb_git tcp dport { ssh, http, https } accept
   }
   chain wan-udp {
     ip daddr $lb_dns udp dport domain accept

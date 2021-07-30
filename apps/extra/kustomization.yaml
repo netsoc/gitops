@@ -5,3 +5,4 @@ resources:
 - tls-main.yaml
 - vaultwarden
 - zammad
+- gitea

@@ -1,0 +1,79 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: gitea
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: gitea
+      version: 4.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: gitea
+        namespace: flux-system
+  valuesFrom:
+    - kind: Secret
+      name: gitea-values
+  values:
+    service:
+      ssh:
+        type: LoadBalancer
+        loadBalancerIP: '134.226.83.103'
+        annotations:
+          metallb.universe.tf/allow-shared-ip: git
+        externalTrafficPolicy: Cluster
+
+    ingress:
+      enabled: true
+      tls:
+        - hosts: [git.netsoc.ie]
+          secretName: tls-main
+      hosts:
+        - host: git.netsoc.ie
+          paths:
+            - path: /
+              pathType: Prefix
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+
+    persistence:
+      enabled: true
+      existingClaim: gitea
+
+    postgresql:
+      persistence:
+        enabled: true
+        existingClaim: gitea-postgresql
+      volumePermissions:
+        enabled: true
+
+    gitea:
+      admin:
+        email: internet@csc.tcd.ie
+        username: gitea_admin
+
+      config:
+        APP_NAME: Netsoc Git
+        ui:
+          SHOW_USER_EMAIL: false
+        ui.meta:
+          AUTHOR: Netsoc
+          DESCRIPTION: Netsoc's hosted Git service
+        service:
+          DISABLE_REGISTRATION: true
+          ENABLE_NOTIFY_MAIL: true
+        mailer:
+          ENABLED: true
+          HOST: shoe.netsoc.tcd.ie:587
+          USER: git@netsoc.tcd.ie
+          FROM: '"Netsoc Git" <git@netsoc.ie>'
+
+      database:
+        builtIn:
+          postgresql:
+            enabled: true
+      cache:
+        builtIn:
+          enabled: true

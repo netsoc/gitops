@@ -11,5 +11,6 @@ resources:
 - ananace.yaml
 - zammad.yaml
 - dex.yaml
+- gitea.yaml
 - devplayer0.yaml
 - netsoc.yaml
