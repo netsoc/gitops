@@ -64,10 +64,13 @@ spec:
     livenessProbe:
       timeoutSeconds: 5
       periodSeconds: 10
-    terminationGracePeriodSeconds: 120
+    terminationGracePeriodSeconds: 180
 
     config:
       log_level: DEBUG
+      timeouts:
+        startup: 3m
+        shutdown: 3m
       iam:
         url: 'http://iamd.default/v1'
       webspaces:
