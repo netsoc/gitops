@@ -8,7 +8,7 @@ spec:
     spec:
       # renovate: registryUrl=https://netsoc.github.io/charts/
       chart: webspaced
-      version: 0.2.2
+      version: 0.2.3
       sourceRef:
         kind: HelmRepository
         name: netsoc
@@ -55,6 +55,16 @@ spec:
         traefik.ingress.kubernetes.io/router.tls: 'true'
 
     staticIP: '172.24.254.2/16'
+
+    startupProbe:
+      initialDelaySeconds: 30
+      timeoutSeconds: 5
+      periodSeconds: 3
+      failureThreshold: 30
+    livenessProbe:
+      timeoutSeconds: 5
+      periodSeconds: 10
+    terminationGracePeriodSeconds: 120
 
     config:
       log_level: DEBUG
