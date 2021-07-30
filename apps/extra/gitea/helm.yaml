@@ -62,7 +62,7 @@ spec:
           AUTHOR: Netsoc
           DESCRIPTION: Netsoc's hosted Git service
         oauth2_client:
-          OPENID_CONNECT_SCOPES: email groups profile offline_access
+          OPENID_CONNECT_SCOPES: email profile
           USERNAME: userid
           ENABLE_AUTO_REGISTRATION: true
         service:
