@@ -61,6 +61,9 @@ spec:
         ui.meta:
           AUTHOR: Netsoc
           DESCRIPTION: Netsoc's hosted Git service
+        oauth2_client:
+          OPENID_CONNECT_SCOPES: email groups profile offline_access
+          ENABLE_AUTO_REGISTRATION: true
         service:
           DISABLE_REGISTRATION: true
           ENABLE_NOTIFY_MAIL: true
