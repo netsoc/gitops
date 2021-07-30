@@ -111,7 +111,7 @@ spec:
       runAsUser: 0
       runAsGroup: 0
     deployment:
-      replicas: 3
+      replicas: 1
       additionalContainers:
         - name: kubelan
           image: 'ghcr.io/devplayer0/kubelan:0.2.3'
