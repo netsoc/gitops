@@ -6,6 +6,7 @@ spec:
   interval: 1m
   chart:
     spec:
+      # renovate: registryUrl=https://dl.gitea.io/charts/
       chart: gitea
       version: 4.0.1
       sourceRef:
