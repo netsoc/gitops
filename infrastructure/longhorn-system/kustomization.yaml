@@ -4,3 +4,11 @@ namespace: longhorn-system
 resources:
 - _namespace.yaml
 - longhorn.yaml
+secretGenerator:
+- name: dev-s3
+  envs:
+  - dev-s3.env
+  files:
+  - AWS_SECRET_ACCESS_KEY=secrets/dev-s3-key.bin
+  options:
+    disableNameSuffixHash: true
