@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/dex
-      tag: 2.29.0-2997c0b8-netsoc
+      tag: 2.30.0-98ce910c-netsoc
 
     ingress:
       enabled: true
