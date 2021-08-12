@@ -44,22 +44,14 @@ spec:
       name: letsencrypt-account-keys
       key: tls.key
     solvers:
-      #- dns01:
-      #    rfc2136:
-      #      nameserver: powerdns-udp.default
-      #      tsigKeyName: 'cert-manager.'
-      #      tsigAlgorithm: HMACSHA512
-      #      tsigSecretSecretRef:
-      #        name: powerdns-tsig
-      #        key: cert-manager.key
-      #  selector:
-      #    dnsZones: ['netsoc.ie']
       - dns01:
-          cloudflare:
-            email: jackos1998@gmail.com
-            apiTokenSecretRef:
-              name: cloudflare-api
-              key: api-token
+          rfc2136:
+            nameserver: powerdns-udp.default
+            tsigKeyName: 'cert-manager.'
+            tsigAlgorithm: HMACSHA512
+            tsigSecretSecretRef:
+              name: powerdns-tsig
+              key: cert-manager.key
         selector:
           dnsZones: ['netsoc.ie']
       - http01:
