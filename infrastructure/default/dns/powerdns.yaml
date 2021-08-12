@@ -39,18 +39,17 @@ spec:
       volumePermissions:
         enabled: true
       initdbScripts:
+        # Separate DB for powerdns-admin
         powerdns-admin.sql: |
           CREATE DATABASE powerdnsadmin;
           GRANT ALL PRIVILEGES ON DATABASE powerdnsadmin to pdns;
 
     service:
       type: LoadBalancer
-      # Unfortunately we'll lose source IP with this, but Local is awkward and breaks internal access :(
-      # https://github.com/kubernetes/kubernetes/pull/97081
-      # https://github.com/kakao/network-node-manager
       externalTrafficPolicy: Local
       loadBalancerIP: '134.226.83.27'
       annotations:
+        # Enables both the UDP and TCP services to share the same IP
         metallb.universe.tf/allow-shared-ip: dns
 
     powerdns:
@@ -58,9 +57,12 @@ spec:
       config:
         default-ttl: 60
         allow-axfr-ips: '10.69.0.0/16,134.226.0.0/16'
+        # Allow dynamic DNS updates, but only when authenticated
         dnsupdate: yes
         allow-dnsupdate-from: ''
         resolver: '127.0.0.1'
+        # Serve up As for any ALIAS records, even for AXFRs
         expand-alias: yes
         outgoing-axfr-expand-alias: yes
+        # Prevent IPVS connection drops
         gpgsql-extra-connection-parameters: keepalives=1 keepalives_idle=60 keepalives_interval=10 keepalives_count=3
