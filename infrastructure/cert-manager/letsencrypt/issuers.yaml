@@ -5,7 +5,7 @@ metadata:
   name: letsencrypt-staging
 spec:
   acme:
-    email: internet@csc.tcd.ie
+    email: acme@netsoc.tcd.ie
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     disableAccountKeyGeneration: true
     privateKeySecretRef:
@@ -37,7 +37,7 @@ metadata:
   name: letsencrypt
 spec:
   acme:
-    email: internet@csc.tcd.ie
+    email: acme@netsoc.tcd.ie
     server: https://acme-v02.api.letsencrypt.org/directory
     disableAccountKeyGeneration: true
     privateKeySecretRef:
