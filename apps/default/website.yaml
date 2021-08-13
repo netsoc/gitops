@@ -15,6 +15,7 @@ spec:
         namespace: flux-system
   values:
     image:
+      pullPolicy: IfNotPresent
       repository: ghcr.io/netsoc/website
       tag: 1748b9d0-1628880028Z # {"$imagepolicy": "flux-system:website:tag"}
     replicaCount: 1
@@ -25,7 +26,9 @@ spec:
           secretName: tls-main
       hosts:
         - host: www.netsoc.ie
-          paths: [/]
+          paths:
+            - path: /
+              pathType: Prefix
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
