@@ -25,7 +25,7 @@ metadata:
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
-    app.kubernetes.io/version: "v1.5.0"
+    app.kubernetes.io/version: "v1.5.2"
 spec:
   group: cert-manager.io
   names:
@@ -740,12 +740,6 @@ spec:
                   format: date-time
       served: true
       storage: true
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
 ---
 # Source: cert-manager/templates/templates.out
 apiVersion: apiextensions.k8s.io/v1
@@ -759,7 +753,7 @@ metadata:
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
-    app.kubernetes.io/version: "v1.5.0"
+    app.kubernetes.io/version: "v1.5.2"
 spec:
   group: cert-manager.io
   names:
@@ -2067,12 +2061,6 @@ spec:
                   type: integer
       served: true
       storage: true
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
 ---
 # Source: cert-manager/templates/templates.out
 apiVersion: apiextensions.k8s.io/v1
@@ -2086,7 +2074,7 @@ metadata:
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
-    app.kubernetes.io/version: "v1.5.0"
+    app.kubernetes.io/version: "v1.5.2"
 spec:
   group: acme.cert-manager.io
   names:
@@ -2465,7 +2453,7 @@ spec:
                               additionalProperties:
                                 type: string
                             serviceType:
-                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                               type: string
                         ingress:
                           description: The ingress based HTTP01 challenge solver will solve challenges by creating or modifying Ingress resources in order to route requests for '/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are provisioned by cert-manager for each Challenge to be completed.
@@ -3013,7 +3001,7 @@ spec:
                                             description: Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
                                             type: string
                             serviceType:
-                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                               type: string
                     selector:
                       description: Selector selects a set of DNSNames on the Certificate resource that should be solved using this challenge solver. If not specified, the solver will be treated as the 'default' solver with the lowest priority, i.e. if any other solver has a more specific match, it will be used instead.
@@ -3422,7 +3410,7 @@ spec:
                               additionalProperties:
                                 type: string
                             serviceType:
-                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP.
+                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                               type: string
                         ingress:
                           description: The ingress based HTTP01 challenge solver will solve challenges by creating or modifying Ingress resources in order to route requests for '/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are provisioned by cert-manager for each Challenge to be completed.
@@ -3970,7 +3958,7 @@ spec:
                                             description: Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
                                             type: string
                             serviceType:
-                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                               type: string
                     selector:
                       description: Selector selects a set of DNSNames on the Certificate resource that should be solved using this challenge solver. If not specified, the solver will be treated as the 'default' solver with the lowest priority, i.e. if any other solver has a more specific match, it will be used instead.
@@ -4109,7 +4097,7 @@ spec:
                       description: Configures cert-manager to attempt to complete authorizations by performing the DNS01 challenge flow.
                       type: object
                       properties:
-                        acmedns:
+                        acmeDNS:
                           description: Use the 'ACME DNS' (https://github.com/joohoi/acme-dns) API to manage DNS01 challenge records.
                           type: object
                           required:
@@ -4177,7 +4165,7 @@ spec:
                                   type: string
                             serviceConsumerDomain:
                               type: string
-                        azuredns:
+                        azureDNS:
                           description: Use the Microsoft Azure DNS API to manage DNS01 challenge records.
                           type: object
                           required:
@@ -4215,7 +4203,7 @@ spec:
                             tenantID:
                               description: when specifying ClientID and ClientSecret then this field is also needed
                               type: string
-                        clouddns:
+                        cloudDNS:
                           description: Use the Google Cloud DNS API to manage DNS01 challenge records.
                           type: object
                           required:
@@ -4380,7 +4368,7 @@ spec:
                               additionalProperties:
                                 type: string
                             serviceType:
-                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                               type: string
                         ingress:
                           description: The ingress based HTTP01 challenge solver will solve challenges by creating or modifying Ingress resources in order to route requests for '/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are provisioned by cert-manager for each Challenge to be completed.
@@ -4928,7 +4916,7 @@ spec:
                                             description: Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
                                             type: string
                             serviceType:
-                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                               type: string
                     selector:
                       description: Selector selects a set of DNSNames on the Certificate resource that should be solved using this challenge solver. If not specified, the solver will be treated as the 'default' solver with the lowest priority, i.e. if any other solver has a more specific match, it will be used instead.
@@ -5338,7 +5326,7 @@ spec:
                               additionalProperties:
                                 type: string
                             serviceType:
-                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                               type: string
                         ingress:
                           description: The ingress based HTTP01 challenge solver will solve challenges by creating or modifying Ingress resources in order to route requests for '/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are provisioned by cert-manager for each Challenge to be completed.
@@ -5886,7 +5874,7 @@ spec:
                                             description: Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
                                             type: string
                             serviceType:
-                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                              description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                               type: string
                     selector:
                       description: Selector selects a set of DNSNames on the Certificate resource that should be solved using this challenge solver. If not specified, the solver will be treated as the 'default' solver with the lowest priority, i.e. if any other solver has a more specific match, it will be used instead.
@@ -5949,12 +5937,6 @@ spec:
       storage: true
       subresources:
         status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
 ---
 # Source: cert-manager/templates/templates.out
 apiVersion: apiextensions.k8s.io/v1
@@ -5968,7 +5950,7 @@ metadata:
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
-    app.kubernetes.io/version: "v1.5.0"
+    app.kubernetes.io/version: "v1.5.2"
 spec:
   group: cert-manager.io
   names:
@@ -6381,7 +6363,7 @@ spec:
                                     additionalProperties:
                                       type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                               ingress:
                                 description: The ingress based HTTP01 challenge solver will solve challenges by creating or modifying Ingress resources in order to route requests for '/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are provisioned by cert-manager for each Challenge to be completed.
@@ -6929,7 +6911,7 @@ spec:
                                                   description: Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
                                                   type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                           selector:
                             description: Selector selects a set of DNSNames on the Certificate resource that should be solved using this challenge solver. If not specified, the solver will be treated as the 'default' solver with the lowest priority, i.e. if any other solver has a more specific match, it will be used instead.
@@ -7550,7 +7532,7 @@ spec:
                                     additionalProperties:
                                       type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP.
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                               ingress:
                                 description: The ingress based HTTP01 challenge solver will solve challenges by creating or modifying Ingress resources in order to route requests for '/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are provisioned by cert-manager for each Challenge to be completed.
@@ -8098,7 +8080,7 @@ spec:
                                                   description: Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
                                                   type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                           selector:
                             description: Selector selects a set of DNSNames on the Certificate resource that should be solved using this challenge solver. If not specified, the solver will be treated as the 'default' solver with the lowest priority, i.e. if any other solver has a more specific match, it will be used instead.
@@ -8450,7 +8432,7 @@ spec:
                             description: Configures cert-manager to attempt to complete authorizations by performing the DNS01 challenge flow.
                             type: object
                             properties:
-                              acmedns:
+                              acmeDNS:
                                 description: Use the 'ACME DNS' (https://github.com/joohoi/acme-dns) API to manage DNS01 challenge records.
                                 type: object
                                 required:
@@ -8518,7 +8500,7 @@ spec:
                                         type: string
                                   serviceConsumerDomain:
                                     type: string
-                              azuredns:
+                              azureDNS:
                                 description: Use the Microsoft Azure DNS API to manage DNS01 challenge records.
                                 type: object
                                 required:
@@ -8556,7 +8538,7 @@ spec:
                                   tenantID:
                                     description: when specifying ClientID and ClientSecret then this field is also needed
                                     type: string
-                              clouddns:
+                              cloudDNS:
                                 description: Use the Google Cloud DNS API to manage DNS01 challenge records.
                                 type: object
                                 required:
@@ -8721,7 +8703,7 @@ spec:
                                     additionalProperties:
                                       type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                               ingress:
                                 description: The ingress based HTTP01 challenge solver will solve challenges by creating or modifying Ingress resources in order to route requests for '/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are provisioned by cert-manager for each Challenge to be completed.
@@ -9269,7 +9251,7 @@ spec:
                                                   description: Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
                                                   type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                           selector:
                             description: Selector selects a set of DNSNames on the Certificate resource that should be solved using this challenge solver. If not specified, the solver will be treated as the 'default' solver with the lowest priority, i.e. if any other solver has a more specific match, it will be used instead.
@@ -9892,7 +9874,7 @@ spec:
                                     additionalProperties:
                                       type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                               ingress:
                                 description: The ingress based HTTP01 challenge solver will solve challenges by creating or modifying Ingress resources in order to route requests for '/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are provisioned by cert-manager for each Challenge to be completed.
@@ -10440,7 +10422,7 @@ spec:
                                                   description: Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
                                                   type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                           selector:
                             description: Selector selects a set of DNSNames on the Certificate resource that should be solved using this challenge solver. If not specified, the solver will be treated as the 'default' solver with the lowest priority, i.e. if any other solver has a more specific match, it will be used instead.
@@ -10680,12 +10662,6 @@ spec:
                         type: string
       served: true
       storage: true
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
 ---
 # Source: cert-manager/templates/templates.out
 apiVersion: apiextensions.k8s.io/v1
@@ -10699,7 +10675,7 @@ metadata:
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
-    app.kubernetes.io/version: "v1.5.0"
+    app.kubernetes.io/version: "v1.5.2"
 spec:
   group: cert-manager.io
   names:
@@ -11112,7 +11088,7 @@ spec:
                                     additionalProperties:
                                       type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                               ingress:
                                 description: The ingress based HTTP01 challenge solver will solve challenges by creating or modifying Ingress resources in order to route requests for '/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are provisioned by cert-manager for each Challenge to be completed.
@@ -11660,7 +11636,7 @@ spec:
                                                   description: Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
                                                   type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                           selector:
                             description: Selector selects a set of DNSNames on the Certificate resource that should be solved using this challenge solver. If not specified, the solver will be treated as the 'default' solver with the lowest priority, i.e. if any other solver has a more specific match, it will be used instead.
@@ -12281,7 +12257,7 @@ spec:
                                     additionalProperties:
                                       type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP.
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                               ingress:
                                 description: The ingress based HTTP01 challenge solver will solve challenges by creating or modifying Ingress resources in order to route requests for '/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are provisioned by cert-manager for each Challenge to be completed.
@@ -12829,7 +12805,7 @@ spec:
                                                   description: Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
                                                   type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                           selector:
                             description: Selector selects a set of DNSNames on the Certificate resource that should be solved using this challenge solver. If not specified, the solver will be treated as the 'default' solver with the lowest priority, i.e. if any other solver has a more specific match, it will be used instead.
@@ -13181,7 +13157,7 @@ spec:
                             description: Configures cert-manager to attempt to complete authorizations by performing the DNS01 challenge flow.
                             type: object
                             properties:
-                              acmedns:
+                              acmeDNS:
                                 description: Use the 'ACME DNS' (https://github.com/joohoi/acme-dns) API to manage DNS01 challenge records.
                                 type: object
                                 required:
@@ -13249,7 +13225,7 @@ spec:
                                         type: string
                                   serviceConsumerDomain:
                                     type: string
-                              azuredns:
+                              azureDNS:
                                 description: Use the Microsoft Azure DNS API to manage DNS01 challenge records.
                                 type: object
                                 required:
@@ -13287,7 +13263,7 @@ spec:
                                   tenantID:
                                     description: when specifying ClientID and ClientSecret then this field is also needed
                                     type: string
-                              clouddns:
+                              cloudDNS:
                                 description: Use the Google Cloud DNS API to manage DNS01 challenge records.
                                 type: object
                                 required:
@@ -13452,7 +13428,7 @@ spec:
                                     additionalProperties:
                                       type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                               ingress:
                                 description: The ingress based HTTP01 challenge solver will solve challenges by creating or modifying Ingress resources in order to route requests for '/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are provisioned by cert-manager for each Challenge to be completed.
@@ -14000,7 +13976,7 @@ spec:
                                                   description: Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
                                                   type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                           selector:
                             description: Selector selects a set of DNSNames on the Certificate resource that should be solved using this challenge solver. If not specified, the solver will be treated as the 'default' solver with the lowest priority, i.e. if any other solver has a more specific match, it will be used instead.
@@ -14623,7 +14599,7 @@ spec:
                                     additionalProperties:
                                       type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                               ingress:
                                 description: The ingress based HTTP01 challenge solver will solve challenges by creating or modifying Ingress resources in order to route requests for '/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are provisioned by cert-manager for each Challenge to be completed.
@@ -15171,7 +15147,7 @@ spec:
                                                   description: Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.
                                                   type: string
                                   serviceType:
-                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP (default).
+                                    description: Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.
                                     type: string
                           selector:
                             description: Selector selects a set of DNSNames on the Certificate resource that should be solved using this challenge solver. If not specified, the solver will be treated as the 'default' solver with the lowest priority, i.e. if any other solver has a more specific match, it will be used instead.
@@ -15411,12 +15387,6 @@ spec:
                         type: string
       served: true
       storage: true
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
 ---
 # Source: cert-manager/templates/templates.out
 apiVersion: apiextensions.k8s.io/v1
@@ -15430,7 +15400,7 @@ metadata:
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
-    app.kubernetes.io/version: "v1.5.0"
+    app.kubernetes.io/version: "v1.5.2"
 spec:
   group: acme.cert-manager.io
   names:
@@ -16093,9 +16063,3 @@ spec:
                   type: string
       served: true
       storage: true
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
