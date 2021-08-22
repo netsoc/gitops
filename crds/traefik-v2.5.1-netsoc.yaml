@@ -1,11 +1,10 @@
-# https://github.com/netsoc/traefik/blob/webspace-ng/integration/fixtures/k8s/01-traefik-crd.yml
 
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.4.1
+    controller-gen.kubebuilder.io/version: v0.5.0
   creationTimestamp: null
   name: ingressroutes.traefik.containo.us
 spec:
@@ -203,7 +202,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.4.1
+    controller-gen.kubebuilder.io/version: v0.5.0
   creationTimestamp: null
   name: ingressroutetcps.traefik.containo.us
 spec:
@@ -363,7 +362,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.4.1
+    controller-gen.kubebuilder.io/version: v0.5.0
   creationTimestamp: null
   name: ingressrouteudps.traefik.containo.us
 spec:
@@ -1166,6 +1165,10 @@ spec:
                 description: If non-zero, controls the maximum idle (keep-alive) to
                   keep per-host. If zero, DefaultMaxIdleConnsPerHost is used.
                 type: integer
+              peerCertURI:
+                description: URI used to match against SAN URI during the peer certificate
+                  verification.
+                type: string
               rootCAsSecrets:
                 description: Add cert file for self-signed certificate.
                 items:
@@ -1225,6 +1228,10 @@ spec:
           spec:
             description: TLSOptionSpec configures TLS for an entry point.
             properties:
+              alpnProtocols:
+                items:
+                  type: string
+                type: array
               cipherSuites:
                 items:
                   type: string
