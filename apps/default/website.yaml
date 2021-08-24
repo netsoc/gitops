@@ -33,6 +33,8 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
         traefik.ingress.kubernetes.io/router.middlewares: 'default-meetings-redirect@kubernetescrd,default-events-redirect@kubernetescrd,default-cli-redirect@kubernetescrd'
+
+# Handy shortcuts
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -63,6 +65,8 @@ spec:
     regex: '^https://www.netsoc.ie/event/?$'
     replacement: 'https://tcd-ie.zoom.us/j/8820425304?pwd=OFdSK3M3UWJDRkZ1NXlUbTBicFNodz09'
     permanent: true
+
+# Redirect from netsoc.ie -> www.netsoc.ie
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -95,6 +99,8 @@ spec:
       - main: 'netsoc.ie'
         sans:
           - '*.netsoc.ie'
+
+# Redirect *.netsoc.tcd.ie -> *.netsoc.ie
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
