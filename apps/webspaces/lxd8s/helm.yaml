@@ -8,7 +8,7 @@ spec:
     spec:
       # renovate: registryUrl=https://devplayer0.github.io/charts/
       chart: lxd8s
-      version: 0.4.4
+      version: 0.5.0
       sourceRef:
         kind: HelmRepository
         name: devplayer0
@@ -27,6 +27,8 @@ spec:
       entryPoints: [lxd]
       hosts: ['*']
 
+    # Disable probes to allow all nodes to start without passing health checks (e.g. for clustered database upgrades)
+    enableProbes: false
     startupProbe:
       initialDelaySeconds: 5
       timeoutSeconds: 5
