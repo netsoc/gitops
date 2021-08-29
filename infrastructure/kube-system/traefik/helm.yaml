@@ -110,6 +110,9 @@ spec:
       runAsNonRoot: false
       runAsUser: 0
       runAsGroup: 0
+    additionalArguments:
+      - '--providers.kubernetescrd.allowexternalnameservices=true'
+      - '--providers.kubernetesingress.allowexternalnameservices=true'
     deployment:
       replicas: 1
       additionalContainers:
