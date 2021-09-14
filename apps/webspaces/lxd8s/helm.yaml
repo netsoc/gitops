@@ -28,7 +28,7 @@ spec:
       hosts: ['*']
 
     # Disable probes to allow all nodes to start without passing health checks (e.g. for clustered database upgrades)
-    enableProbes: true
+    enableProbes: false
     startupProbe:
       initialDelaySeconds: 5
       timeoutSeconds: 5
