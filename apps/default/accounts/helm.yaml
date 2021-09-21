@@ -8,7 +8,7 @@ spec:
     spec:
       # renovate: registryUrl=https://netsoc.github.io/charts/
       chart: accounts
-      version: 0.2.1
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
         name: netsoc
