@@ -17,7 +17,7 @@ spec:
     image:
       pullPolicy: IfNotPresent
       repository: ghcr.io/netsoc/website
-      tag: f7a1ee5e-1636818488Z # {"$imagepolicy": "flux-system:website:tag"}
+      tag: 083f892e-1636825624Z # {"$imagepolicy": "flux-system:website:tag"}
     replicaCount: 1
     ingress:
       enabled: true
